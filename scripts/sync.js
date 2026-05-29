@@ -2,12 +2,15 @@
 require('dotenv').config();
 const { syncAll } = require('../lib/importData');
 const { recomputeAll, lockStartedMatches } = require('../lib/recompute');
+const bracket = require('../lib/bracket');
 
 (async () => {
   const counts = await syncAll();
   const rescored = recomputeAll();
-  const locked = lockStartedMatches();
-  console.log('Synced:', counts, '| rescored predictions:', rescored, '| locked:', locked);
+  const bracketRescored = bracket.recomputeAllBracket();
+  bracket.recomputeQualification();
+  const locked = lockStartedMatches() + bracket.lockStartedBracket();
+  console.log('Synced:', counts, '| match tips:', rescored, '| bracket tips:', bracketRescored, '| locked:', locked);
 })().catch((e) => {
   console.error('Sync failed:', e.message);
   process.exit(1);

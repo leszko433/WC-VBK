@@ -21,6 +21,7 @@ app.use(
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/leagues', require('./routes/leagues'));
 app.use('/api', require('./routes/predictions'));
+app.use('/api', require('./routes/bracket'));
 app.use('/api/admin', require('./routes/admin'));
 
 // Static frontend

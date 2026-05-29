@@ -108,18 +108,22 @@ router.get('/:id/leaderboard', (req, res) => {
   if (!membership.get(leagueId, req.user.id)) {
     return res.status(403).json({ error: 'Du är inte med i den här ligan' });
   }
+  // Total = match tips + bracket (result + advancement) + qualification, summed
+  // per user via independent subqueries to avoid join fan-out.
   const rows = db
     .prepare(
       `SELECT u.id, u.display_name,
-              COALESCE(SUM(p.points), 0) AS points,
-              COUNT(p.id) AS predictions
+         (SELECT COUNT(*)            FROM predictions p WHERE p.user_id = u.id AND p.league_id = lm.league_id) AS predictions,
+         (SELECT COALESCE(SUM(p.points),0) FROM predictions p WHERE p.user_id = u.id AND p.league_id = lm.league_id) AS match_points,
+         (SELECT COALESCE(SUM(b.points_result + b.points_advance),0) FROM bracket_predictions b WHERE b.user_id = u.id AND b.league_id = lm.league_id) AS bracket_points,
+         (SELECT COALESCE(SUM(q.points),0) FROM qualifier_picks q WHERE q.user_id = u.id AND q.league_id = lm.league_id) AS qual_points
        FROM league_members lm
        JOIN users u ON u.id = lm.user_id
-       LEFT JOIN predictions p ON p.user_id = u.id AND p.league_id = lm.league_id
-       WHERE lm.league_id = ?
-       GROUP BY u.id ORDER BY points DESC, u.display_name`
+       WHERE lm.league_id = ?`
     )
-    .all(leagueId);
+    .all(leagueId)
+    .map((r) => ({ ...r, points: r.match_points + r.bracket_points + r.qual_points }))
+    .sort((a, b) => b.points - a.points || a.display_name.localeCompare(b.display_name));
   res.json(rows);
 });
 

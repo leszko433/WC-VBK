@@ -142,6 +142,7 @@ function switchLeagueTab(tab) {
   $$('[data-ltab]').forEach((x) => x.classList.toggle('active', x.dataset.ltab === tab));
   $$('.ltab').forEach((x) => x.classList.add('hidden'));
   $('#ltab-' + tab).classList.remove('hidden');
+  if (tab === 'bracket') loadBracket();
   if (tab === 'leaderboard') loadLeaderboard();
   if (tab === 'admin') loadInvites();
 }
@@ -223,6 +224,132 @@ async function loadLeaderboard() {
   });
 }
 
+/* ---------- Bracket (slutspel) ---------- */
+let bracketData = null;
+const ROUND_TITLE = { r32: '16-delsfinal', r16: 'Åttondelsfinal', qf: 'Kvartsfinal', sf: 'Semifinal', final: 'Final' };
+
+async function loadBracket() {
+  bracketData = await api.get(`/api/leagues/${state.leagueId}/bracket`);
+  renderQualification();
+  renderBracket();
+}
+
+function renderQualification() {
+  const wrap = $('#qualGroups');
+  wrap.innerHTML = '';
+  const picked = new Set(bracketData.myQualifiers);
+  const r32Started = bracketData.slots.some((s) => s.round === 'r32' && s.status === 'finished');
+  const groups = {};
+  bracketData.teams.forEach((t) => { (groups[t.grp || '?'] = groups[t.grp || '?'] || []).push(t); });
+  Object.keys(groups).sort().forEach((g) => {
+    const div = document.createElement('div');
+    div.className = 'qgroup';
+    div.innerHTML = `<h4>Grupp ${esc(g)}</h4>`;
+    groups[g].forEach((t) => {
+      const lab = document.createElement('label');
+      lab.className = 'qteam' + (picked.has(t.id) ? ' picked' : '');
+      lab.innerHTML = `<input type="checkbox" data-qteam="${t.id}" ${picked.has(t.id) ? 'checked' : ''} ${r32Started ? 'disabled' : ''}/> ${esc(t.flag || '')} ${esc(t.name)}`;
+      lab.querySelector('input').addEventListener('change', (e) => {
+        lab.classList.toggle('picked', e.target.checked);
+        updateQualCount();
+      });
+      div.appendChild(lab);
+    });
+    wrap.appendChild(div);
+  });
+  $('#saveQualBtn').disabled = r32Started;
+  updateQualCount();
+}
+function updateQualCount() {
+  const n = $$('#qualGroups input[data-qteam]:checked').length;
+  $('#qualCount').textContent = `${n} / 32 lag valda`;
+}
+
+$('#saveQualBtn').addEventListener('click', async () => {
+  const teamIds = $$('#qualGroups input[data-qteam]:checked').map((i) => Number(i.dataset.qteam));
+  try {
+    const r = await api.post(`/api/leagues/${state.leagueId}/qualification`, { teamIds });
+    msg($('#qualMsg'), `Sparade ${r.saved} lag`, true);
+  } catch (err) { msg($('#qualMsg'), err.message); }
+});
+
+function renderBracket() {
+  const wrap = $('#bracket');
+  wrap.innerHTML = '';
+  const byRound = {};
+  bracketData.slots.forEach((s) => { (byRound[s.round] = byRound[s.round] || []).push(s); });
+  bracketData.rounds.forEach((round) => {
+    const slots = byRound[round] || [];
+    if (!slots.length) return;
+    const col = document.createElement('div');
+    col.className = 'bcol';
+    const adv = bracketData.advancePoints[round] || 0;
+    col.innerHTML = `<h4>${ROUND_TITLE[round]} ${adv ? `· +${adv}p/lag` : ''}</h4>`;
+    slots.forEach((s) => col.appendChild(renderSlot(s)));
+    wrap.appendChild(col);
+  });
+}
+
+function renderSlot(s) {
+  const el = document.createElement('div');
+  const finished = s.home_goals != null && s.away_goals != null;
+  const locked = finished || !!s.locked;
+  el.className = 'bslot' + (locked ? ' locked' : '');
+  const sideHtml = (id, name, flag) => {
+    if (!id) return `<div class="tbd">— okänt lag —</div>`;
+    const sel = s.pred_winner_team_id === id ? ' sel' : '';
+    const actual = finished && s.winner_team_id === id ? ' actual-win' : '';
+    return `<div class="pick${sel}${actual}" data-slot="${s.id}" data-team="${id}">
+      ${esc(flag || '')} ${esc(name)}</div>`;
+  };
+  const ph = s.pred_home != null ? s.pred_home : '';
+  const pa = s.pred_away != null ? s.pred_away : '';
+  let res = '';
+  if (finished) {
+    res = `<div class="res">Facit: ${s.home_goals}–${s.away_goals}` +
+      (s.points_result != null ? ` · <b>+${(s.points_result || 0) + (s.points_advance || 0)}p</b>` : '') + `</div>`;
+  }
+  el.innerHTML =
+    sideHtml(s.home_team_id, s.home_name, s.home_flag) +
+    sideHtml(s.away_team_id, s.away_name, s.away_flag) +
+    `<div class="sline">
+       <input type="number" min="0" data-slot="${s.id}" data-side="home" value="${ph}" ${locked ? 'disabled' : ''}/>
+       <span class="vs">–</span>
+       <input type="number" min="0" data-slot="${s.id}" data-side="away" value="${pa}" ${locked ? 'disabled' : ''}/>
+     </div>` + res;
+  if (!locked) {
+    el.querySelectorAll('.pick').forEach((p) =>
+      p.addEventListener('click', () => {
+        el.querySelectorAll('.pick').forEach((x) => x.classList.remove('sel'));
+        p.classList.add('sel');
+      })
+    );
+  }
+  return el;
+}
+
+$('#saveBracketBtn').addEventListener('click', async () => {
+  const map = {};
+  $$('#bracket .bslot input[type=number]').forEach((inp) => {
+    if (inp.disabled) return;
+    const id = inp.dataset.slot;
+    map[id] = map[id] || { slotId: Number(id) };
+    if (inp.value !== '') map[id][inp.dataset.side] = Number(inp.value);
+  });
+  $$('#bracket .pick.sel').forEach((p) => {
+    const id = p.dataset.slot;
+    map[id] = map[id] || { slotId: Number(id) };
+    map[id].winnerTeamId = Number(p.dataset.team);
+  });
+  const picks = Object.values(map);
+  if (!picks.length) return msg($('#bracketMsg'), 'Inga tips att spara', false);
+  try {
+    const r = await api.post(`/api/leagues/${state.leagueId}/bracket`, { picks });
+    msg($('#bracketMsg'), `Sparade ${r.saved.length} slutspelstips${r.skipped.length ? ', ' + r.skipped.length + ' hoppade över' : ''}`, true);
+    loadBracket();
+  } catch (err) { msg($('#bracketMsg'), err.message); }
+});
+
 /* ---------- League admin (invites) ---------- */
 $('#inviteForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -251,6 +378,45 @@ async function loadInvites() {
 async function loadSiteAdmin() {
   show('admin');
   await renderAdminMatches();
+  await renderAdminBracket();
+}
+
+async function renderAdminBracket() {
+  const wrap = $('#adminBracket');
+  wrap.innerHTML = '';
+  let slots = [];
+  try {
+    const leagues = await api.get('/api/leagues');
+    if (leagues[0]) slots = (await api.get(`/api/leagues/${leagues[0].id}/bracket`)).slots;
+  } catch (_) {}
+  slots = slots.filter((s) => s.home_team_id && s.away_team_id);
+  if (!slots.length) { wrap.innerHTML = '<p class="muted">Inga slutspelsmatcher ännu. Kör sync först.</p>'; return; }
+  slots.forEach((s) => {
+    const finished = s.home_goals != null && s.away_goals != null;
+    const el = document.createElement('div');
+    el.className = 'match';
+    el.innerHTML = `
+      <div class="team home">${esc(s.label)}: ${esc(s.home_flag || '')} ${esc(s.home_name)}</div>
+      <div class="score">
+        <input type="number" min="0" id="bh-${s.id}" value="${finished ? s.home_goals : ''}" />
+        <span class="vs">–</span>
+        <input type="number" min="0" id="ba-${s.id}" value="${finished ? s.away_goals : ''}" />
+        <button class="btn small" data-bresult="${s.id}">Spara</button>
+      </div>
+      <div class="team away">${esc(s.away_name)} ${esc(s.away_flag || '')}</div>`;
+    wrap.appendChild(el);
+  });
+  $$('[data-bresult]').forEach((btn) =>
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.bresult;
+      try {
+        const r = await api.post(`/api/admin/bracket/${id}/result`, {
+          home: Number($('#bh-' + id).value), away: Number($('#ba-' + id).value),
+        });
+        btn.textContent = `✓ (${r.predictions_rescored})`;
+      } catch (err) { alert(err.message); }
+    })
+  );
 }
 $('#syncBtn').addEventListener('click', async () => {
   msg($('#syncMsg'), 'Synkar…', true);

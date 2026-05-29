@@ -6,16 +6,508 @@
         "season": 2026,
         "standings": [
           [
-            { "rank": 1, "team": { "id": 26,  "name": "Argentina",    "logo": "" }, "group": "Group A", "flag": "🇦🇷" },
-            { "rank": 2, "team": { "id": 16,  "name": "Mexico",       "logo": "" }, "group": "Group A", "flag": "🇲🇽" },
-            { "rank": 3, "team": { "id": 24,  "name": "Poland",       "logo": "" }, "group": "Group A", "flag": "🇵🇱" },
-            { "rank": 4, "team": { "id": 23,  "name": "Saudi Arabia", "logo": "" }, "group": "Group A", "flag": "🇸🇦" }
+            {
+              "rank": 1,
+              "team": {
+                "id": 100,
+                "name": "Brasilien",
+                "logo": ""
+              },
+              "group": "Group A",
+              "flag": "🇧🇷"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 101,
+                "name": "Marocko",
+                "logo": ""
+              },
+              "group": "Group A",
+              "flag": "🇲🇦"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 102,
+                "name": "Serbien",
+                "logo": ""
+              },
+              "group": "Group A",
+              "flag": "🇷🇸"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 103,
+                "name": "Kanada",
+                "logo": ""
+              },
+              "group": "Group A",
+              "flag": "🇨🇦"
+            }
           ],
           [
-            { "rank": 1, "team": { "id": 2,   "name": "France",       "logo": "" }, "group": "Group B", "flag": "🇫🇷" },
-            { "rank": 2, "team": { "id": 21,  "name": "Denmark",      "logo": "" }, "group": "Group B", "flag": "🇩🇰" },
-            { "rank": 3, "team": { "id": 28,  "name": "Tunisia",      "logo": "" }, "group": "Group B", "flag": "🇹🇳" },
-            { "rank": 4, "team": { "id": 20,  "name": "Australia",    "logo": "" }, "group": "Group B", "flag": "🇦🇺" }
+            {
+              "rank": 1,
+              "team": {
+                "id": 104,
+                "name": "Frankrike",
+                "logo": ""
+              },
+              "group": "Group B",
+              "flag": "🇫🇷"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 105,
+                "name": "Senegal",
+                "logo": ""
+              },
+              "group": "Group B",
+              "flag": "🇸🇳"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 106,
+                "name": "Polen",
+                "logo": ""
+              },
+              "group": "Group B",
+              "flag": "🇵🇱"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 107,
+                "name": "Costa Rica",
+                "logo": ""
+              },
+              "group": "Group B",
+              "flag": "🇨🇷"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 108,
+                "name": "Argentina",
+                "logo": ""
+              },
+              "group": "Group C",
+              "flag": "🇦🇷"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 109,
+                "name": "Japan",
+                "logo": ""
+              },
+              "group": "Group C",
+              "flag": "🇯🇵"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 110,
+                "name": "Tunisien",
+                "logo": ""
+              },
+              "group": "Group C",
+              "flag": "🇹🇳"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 111,
+                "name": "Nya Zeeland",
+                "logo": ""
+              },
+              "group": "Group C",
+              "flag": "🇳🇿"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 112,
+                "name": "Tyskland",
+                "logo": ""
+              },
+              "group": "Group D",
+              "flag": "🇩🇪"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 113,
+                "name": "Sydkorea",
+                "logo": ""
+              },
+              "group": "Group D",
+              "flag": "🇰🇷"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 114,
+                "name": "Ghana",
+                "logo": ""
+              },
+              "group": "Group D",
+              "flag": "🇬🇭"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 115,
+                "name": "Panama",
+                "logo": ""
+              },
+              "group": "Group D",
+              "flag": "🇵🇦"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 116,
+                "name": "Spanien",
+                "logo": ""
+              },
+              "group": "Group E",
+              "flag": "🇪🇸"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 117,
+                "name": "Schweiz",
+                "logo": ""
+              },
+              "group": "Group E",
+              "flag": "🇨🇭"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 118,
+                "name": "Kamerun",
+                "logo": ""
+              },
+              "group": "Group E",
+              "flag": "🇨🇲"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 119,
+                "name": "Jordanien",
+                "logo": ""
+              },
+              "group": "Group E",
+              "flag": "🇯🇴"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 120,
+                "name": "Portugal",
+                "logo": ""
+              },
+              "group": "Group F",
+              "flag": "🇵🇹"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 121,
+                "name": "Uruguay",
+                "logo": ""
+              },
+              "group": "Group F",
+              "flag": "🇺🇾"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 122,
+                "name": "Egypten",
+                "logo": ""
+              },
+              "group": "Group F",
+              "flag": "🇪🇬"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 123,
+                "name": "Curaçao",
+                "logo": ""
+              },
+              "group": "Group F",
+              "flag": "🇨🇼"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 124,
+                "name": "Nederländerna",
+                "logo": ""
+              },
+              "group": "Group G",
+              "flag": "🇳🇱"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 125,
+                "name": "Mexiko",
+                "logo": ""
+              },
+              "group": "Group G",
+              "flag": "🇲🇽"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 126,
+                "name": "Iran",
+                "logo": ""
+              },
+              "group": "Group G",
+              "flag": "🇮🇷"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 127,
+                "name": "Haiti",
+                "logo": ""
+              },
+              "group": "Group G",
+              "flag": "🇭🇹"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 128,
+                "name": "Belgien",
+                "logo": ""
+              },
+              "group": "Group H",
+              "flag": "🇧🇪"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 129,
+                "name": "Kroatien",
+                "logo": ""
+              },
+              "group": "Group H",
+              "flag": "🇭🇷"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 130,
+                "name": "Nigeria",
+                "logo": ""
+              },
+              "group": "Group H",
+              "flag": "🇳🇬"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 131,
+                "name": "Uzbekistan",
+                "logo": ""
+              },
+              "group": "Group H",
+              "flag": "🇺🇿"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 132,
+                "name": "Italien",
+                "logo": ""
+              },
+              "group": "Group I",
+              "flag": "🇮🇹"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 133,
+                "name": "Colombia",
+                "logo": ""
+              },
+              "group": "Group I",
+              "flag": "🇨🇴"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 134,
+                "name": "Algeriet",
+                "logo": ""
+              },
+              "group": "Group I",
+              "flag": "🇩🇿"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 135,
+                "name": "Sydafrika",
+                "logo": ""
+              },
+              "group": "Group I",
+              "flag": "🇿🇦"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 136,
+                "name": "England",
+                "logo": ""
+              },
+              "group": "Group J",
+              "flag": "🇬🇧"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 137,
+                "name": "Ecuador",
+                "logo": ""
+              },
+              "group": "Group J",
+              "flag": "🇪🇨"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 138,
+                "name": "Saudiarabien",
+                "logo": ""
+              },
+              "group": "Group J",
+              "flag": "🇸🇦"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 139,
+                "name": "Jamaica",
+                "logo": ""
+              },
+              "group": "Group J",
+              "flag": "🇯🇲"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 140,
+                "name": "USA",
+                "logo": ""
+              },
+              "group": "Group K",
+              "flag": "🇺🇸"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 141,
+                "name": "Australien",
+                "logo": ""
+              },
+              "group": "Group K",
+              "flag": "🇦🇺"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 142,
+                "name": "Qatar",
+                "logo": ""
+              },
+              "group": "Group K",
+              "flag": "🇶🇦"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 143,
+                "name": "Kap Verde",
+                "logo": ""
+              },
+              "group": "Group K",
+              "flag": "🇨🇻"
+            }
+          ],
+          [
+            {
+              "rank": 1,
+              "team": {
+                "id": 144,
+                "name": "Danmark",
+                "logo": ""
+              },
+              "group": "Group L",
+              "flag": "🇩🇰"
+            },
+            {
+              "rank": 2,
+              "team": {
+                "id": 145,
+                "name": "Peru",
+                "logo": ""
+              },
+              "group": "Group L",
+              "flag": "🇵🇪"
+            },
+            {
+              "rank": 3,
+              "team": {
+                "id": 146,
+                "name": "Elfenbenskusten",
+                "logo": ""
+              },
+              "group": "Group L",
+              "flag": "🇨🇮"
+            },
+            {
+              "rank": 4,
+              "team": {
+                "id": 147,
+                "name": "Norge",
+                "logo": ""
+              },
+              "group": "Group L",
+              "flag": "🇳🇴"
+            }
           ]
         ]
       }

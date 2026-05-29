@@ -85,6 +85,7 @@
         <h2 id="leagueName"></h2>
         <div class="leaguetabs">
           <button class="tab active" data-ltab="fixtures">Matcher</button>
+          <button class="tab" data-ltab="bracket">Slutspel</button>
           <button class="tab" data-ltab="leaderboard">Topplista</button>
           <button class="tab hidden" data-ltab="admin" id="leagueAdminTab">Liga-admin</button>
         </div>
@@ -96,6 +97,25 @@
         <div class="savebar">
           <button class="btn primary" id="savePredsBtn">Spara mina tips</button>
           <span id="saveMsg" class="formmsg"></span>
+        </div>
+      </div>
+
+      <div id="ltab-bracket" class="ltab hidden">
+        <div class="card" id="qualCard">
+          <h3>👥 Kvalificering — vilka 32 lag når slutspelet?</h3>
+          <p class="muted">3 poäng per lag som du prickar rätt (max 96 p). Låses när slutspelet börjar.</p>
+          <div id="qualGroups" class="qualgroups"></div>
+          <div class="savebar">
+            <span id="qualCount" class="muted"></span>
+            <button class="btn primary small" id="saveQualBtn">Spara kval-tips</button>
+            <span id="qualMsg" class="formmsg"></span>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:18px">Tippa varje slutspelsmatch: <b>resultat</b> (3/2/2, allt rätt = 7) och vilket <b>lag som går vidare</b> (bonus 6/9/12/15 p).</p>
+        <div id="bracket" class="bracket"></div>
+        <div class="savebar">
+          <button class="btn primary" id="saveBracketBtn">Spara slutspelstips</button>
+          <span id="bracketMsg" class="formmsg"></span>
         </div>
       </div>
 
@@ -124,9 +144,12 @@
         <span id="syncMsg" class="formmsg"></span>
         <p class="muted">Hämtar grupper, lag och matcher (mockdata lokalt, live-API vid driftsättning).</p>
         <hr />
-        <h3>Registrera resultat</h3>
+        <h3>Registrera gruppspelsresultat</h3>
         <p class="muted">Sätt slutresultat så räknas alla tips om automatiskt.</p>
         <div id="adminMatches"></div>
+        <hr />
+        <h3>Registrera slutspelsresultat</h3>
+        <div id="adminBracket"></div>
       </div>
     </section>
   </main>

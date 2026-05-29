@@ -75,3 +75,54 @@ CREATE TABLE IF NOT EXISTS predictions (
 
 CREATE INDEX IF NOT EXISTS idx_pred_league ON predictions(league_id);
 CREATE INDEX IF NOT EXISTS idx_pred_match  ON predictions(match_id);
+
+-- ===== Slutspelsträd (knockout bracket) =====
+-- Fixed universal key: one row per knockout match slot. Teams/results fill in as
+-- they become known. Positional feed: round R pos p is fed by previous round
+-- positions (2p-1, 2p).
+CREATE TABLE IF NOT EXISTS bracket_slots (
+  id             INTEGER PRIMARY KEY AUTOINCREMENT,
+  round          TEXT NOT NULL,    -- 'r32' | 'r16' | 'qf' | 'sf' | 'final'
+  pos            INTEGER NOT NULL, -- 1-based position within the round
+  label          TEXT,             -- e.g. 'Åttondelsfinal 1'
+  api_fixture_id INTEGER UNIQUE,
+  home_team_id   INTEGER REFERENCES teams(id),
+  away_team_id   INTEGER REFERENCES teams(id),
+  home_goals     INTEGER,
+  away_goals     INTEGER,
+  winner_team_id INTEGER REFERENCES teams(id),
+  status         TEXT NOT NULL DEFAULT 'scheduled',
+  UNIQUE (round, pos)
+);
+
+-- Per-user knockout prediction for a slot: a scoreline (result track) and which
+-- team advances (advancement/bonus track).
+CREATE TABLE IF NOT EXISTS bracket_predictions (
+  id              INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id         INTEGER NOT NULL REFERENCES users(id),
+  league_id       INTEGER NOT NULL REFERENCES leagues(id),
+  slot_id         INTEGER NOT NULL REFERENCES bracket_slots(id),
+  pred_home       INTEGER,
+  pred_away       INTEGER,
+  pred_winner_team_id INTEGER REFERENCES teams(id),
+  points_result   INTEGER NOT NULL DEFAULT 0,
+  points_advance  INTEGER NOT NULL DEFAULT 0,
+  locked          INTEGER NOT NULL DEFAULT 0,
+  updated_at      TEXT NOT NULL DEFAULT (datetime('now')),
+  UNIQUE (user_id, league_id, slot_id)
+);
+
+-- Qualification tier (3 p/lag for reaching the round of 32): the set of teams a
+-- user predicts will reach the knockout stage.
+CREATE TABLE IF NOT EXISTS qualifier_picks (
+  id        INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id   INTEGER NOT NULL REFERENCES users(id),
+  league_id INTEGER NOT NULL REFERENCES leagues(id),
+  team_id   INTEGER NOT NULL REFERENCES teams(id),
+  points    INTEGER NOT NULL DEFAULT 0,
+  UNIQUE (user_id, league_id, team_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_bpred_league ON bracket_predictions(league_id);
+CREATE INDEX IF NOT EXISTS idx_bpred_slot   ON bracket_predictions(slot_id);
+CREATE INDEX IF NOT EXISTS idx_qual_league  ON qualifier_picks(league_id);

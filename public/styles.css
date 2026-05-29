@@ -128,6 +128,30 @@ input:focus { outline: none; border-color: var(--green); }
 .match .kick { display: block; font-size: 11px; color: var(--muted); text-align: center; }
 .savebar { margin-top: 18px; display: flex; align-items: center; gap: 14px; }
 
+/* Qualification picker */
+.qualgroups { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.qgroup h4 { margin: 0 0 6px; color: var(--green); font-size: 14px; }
+.qteam { display: flex; align-items: center; gap: 7px; padding: 5px 7px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.qteam:hover { background: var(--card); }
+.qteam input { width: auto; margin: 0; }
+.qteam.picked { background: var(--green-soft); }
+
+/* Bracket */
+.bracket { display: flex; gap: 16px; overflow-x: auto; padding: 6px 2px 16px; }
+.bcol { min-width: 220px; flex: 0 0 auto; }
+.bcol h4 { color: var(--green); font-size: 13px; margin: 0 0 10px; text-transform: uppercase; letter-spacing: .5px; }
+.bslot { border: 1px solid var(--border); border-radius: 10px; padding: 9px 10px; margin-bottom: 10px; background: var(--card2); }
+.bslot .pick { display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-radius: 7px; cursor: pointer; }
+.bslot .pick:hover { background: var(--card); }
+.bslot .pick.sel { background: var(--green-soft); outline: 1px solid var(--green-dark); }
+.bslot .pick.actual-win { font-weight: 700; }
+.bslot .tbd { color: var(--muted); font-style: italic; padding: 4px 6px; font-size: 13px; }
+.bslot .sline { display: flex; align-items: center; gap: 5px; margin-top: 7px; }
+.bslot .sline input { width: 40px; text-align: center; padding: 6px; margin: 0; }
+.bslot .res { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.bslot .res b { color: var(--green); }
+.bslot.locked { opacity: .8; }
+
 /* Leaderboard */
 .board { width: 100%; border-collapse: collapse; }
 .board th, .board td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); }

@@ -9,21 +9,33 @@ Säg till Emil om det är några frågor kring upplägg, hur branches fungerar, 
 Webbapp där inbjudna användare skapar konto och tippar fotbolls-VM 2026. Exakt resultat ger mest
 poäng. Byggd med **Node.js + Express + SQLite** och en vanilla HTML/CSS/JS-frontend.
 
-## Poängsystem (MVP)
-Per match: rätt utfall (1X2) **+3**, exakt hemmamål **+2**, exakt bortamål **+2** (allt rätt = **7**,
-"Perfekt tips"). Hela regelverket (slutspelsträd, turneringsbonusar, 3 målgörare, bonusfrågor)
-finns på sidan `/rules.html` och rullas ut enligt roadmappen nedan.
+## Poängsystem
+**Matcher:** rätt utfall (1X2) **+3**, exakt hemmamål **+2**, exakt bortamål **+2** (allt rätt = **7**,
+"Perfekt tips").
+
+**Slutspelsträd (slutspel):** två parallella spår enligt reglerna –
+1. *Resultat per slot:* samma 3/2/2/7 för varje slutspelsmatch, oavsett vilka lag som spelar den.
+2. *Rätt lag (bonus):* poäng för varje lag du placerar i rätt runda. Att pricka en slots vinnare =
+   det laget når nästa runda: nå åttondel **6**, kvart **9**, semi **12**, final **15**.
+3. *Kvalificering:* **3 p/lag** för varje lag du tippar når slutspelet (16-delsfinal).
+
+Maxpoäng slutspelsträd = 32×3 + 16×6 + 8×9 + 4×12 + 2×15 = **342**. Hela regelverket finns på
+`/rules.html`. Världsmästare (30 p), målgörare m.m. rullas ut enligt roadmappen nedan.
 
 ## Kom igång (lokalt)
 ```bash
 npm install
 cp .env.example .env        # USE_MOCK_DATA=true funkar direkt med exempeldata
 npm run seed-admin          # skapar site-admin från ADMIN_* i .env
-node scripts/sync.js        # laddar lag + matcher (mockdata)
+node scripts/sync.js        # laddar lag + matcher + slutspelsträd (mockdata)
 npm start                   # http://localhost:3000
 ```
 Logga in som admin → skapa en liga → skapa en inbjudningskod → registrera spelare med koden →
-tippa matcher → admin registrerar resultat → poäng och topplista uppdateras automatiskt.
+tippa matcher och slutspelsträd → admin registrerar resultat → poäng och topplista uppdateras
+automatiskt.
+
+Exempeldatan (en komplett 48-lags-turnering med slutspelsträd) genereras av
+`node scripts/genSeed.js` om du vill bygga om den.
 
 ## Live-data (vid driftsättning)
 API-anrop sker **bara server-side** (nyckeln exponeras aldrig i webbläsaren). Sätt i `.env`:
@@ -37,18 +49,23 @@ och resultat. **Committa aldrig den riktiga nyckeln** – `.env` är gitignorera
 
 ## Struktur
 - `server.js`, `db.js`, `schema.sql` – server, databas, schema
-- `lib/scoring.js` – ren poänglogik (enhetstestad i `test/`)
+- `lib/scoring.js` – ren matchpoänglogik (enhetstestad i `test/`)
+- `lib/bracket.js` – slutspelsträdets två poängspår + kvalificering (enhetstestad)
 - `lib/apiFootball.js` – api-football-klient (mock/live), `lib/importData.js`, `lib/recompute.js`
-- `routes/` – `auth`, `leagues`, `predictions`, `admin`
+- `routes/` – `auth`, `leagues`, `predictions`, `bracket`, `admin`
 - `public/` – frontend (`index.html`, `app.js`, `styles.css`, `rules.html`)
 - `seed/` – exempeldata i api-footballs format
-- `scripts/` – `createAdmin.js`, `sync.js`
+- `scripts/` – `createAdmin.js`, `sync.js`, `genSeed.js`
 
 Tester: `npm test`.
 
-## Roadmap (efter MVP, samma grund)
-Slutspelsträd med fast slutspelsnyckel (två poängspår) · två tippningsfönster (för-VM + efter
-gruppspel) · 3 personliga målgörare (mål + assist) · turneringsbonusar · egna bonusfrågor.
+## Roadmap (samma grund)
+- [x] Matchtippning + poäng + topplista
+- [x] Slutspelsträd med fast slutspelsnyckel (resultat- + lag-spår) och kvalificering
+- [ ] Två tippningsfönster (för-VM + efter gruppspel) som separata, låsbara faser
+- [ ] 3 personliga målgörare (mål + assist)
+- [ ] Turneringsbonusar (världsmästare, skyttekung, assistkung, totalt antal mål)
+- [ ] Egna bonusfrågor (ligaadmin, 1–100 p)
 
 ---
 
