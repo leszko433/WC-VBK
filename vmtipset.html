@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VM-tipset 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e0c; --panel:#121815; --panel2:#0e1310; --line:#1f2a24;
+    --green:#22c55e; --green-dim:#16a34a; --green-glow:rgba(34,197,94,.25);
+    --txt:#e8efe9; --muted:#7e8c84; --gold:#e9b949; --bad:#ef4444;
+    --display:'Anton',sans-serif; --body:'Sora',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:var(--body);line-height:1.5;
+    background-image:radial-gradient(circle at 20% 0%,rgba(34,197,94,.07),transparent 40%),
+                     radial-gradient(circle at 90% 100%,rgba(34,197,94,.05),transparent 45%);
+    min-height:100vh;padding-bottom:80px}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 16px}
+  header{text-align:center;padding:32px 0 16px}
+  header h1{font-family:var(--display);font-size:clamp(38px,8vw,72px);letter-spacing:2px;
+    background:linear-gradient(180deg,#fff,var(--green));-webkit-background-clip:text;
+    background-clip:text;color:transparent;line-height:.95}
+  header p{color:var(--muted);margin-top:8px;font-size:14px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:24px 0}
+  .tab{background:var(--panel);border:1px solid var(--line);color:var(--muted);
+    padding:10px 18px;border-radius:10px;cursor:pointer;font-family:var(--body);
+    font-size:14px;font-weight:600;transition:.15s}
+  .tab:hover{border-color:var(--green-dim);color:var(--txt)}
+  .tab.active{background:var(--green);color:#04130a;border-color:var(--green)}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:24px;margin-bottom:20px}
+  .panel h2{font-family:var(--display);font-size:24px;letter-spacing:1px;margin-bottom:4px}
+  .panel .sub{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .hide{display:none}
+  label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}
+  input,select{background:var(--panel2);border:1px solid var(--line);color:var(--txt);
+    padding:10px 12px;border-radius:8px;font-family:var(--body);font-size:14px;width:100%}
+  input:focus,select:focus{outline:none;border-color:var(--green)}
+  .btn{background:var(--green);color:#04130a;border:none;padding:12px 20px;
+    border-radius:10px;font-family:var(--body);font-weight:700;cursor:pointer;
+    font-size:14px;transition:.15s}
+  .btn:hover{background:#2ee06a;transform:translateY(-1px)}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
+  .btn.ghost:hover{border-color:var(--green)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .match{display:grid;grid-template-columns:1fr 64px 14px 64px 1fr;gap:8px;
+    align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+  .match .team{font-size:14px}
+  .match .team.away{text-align:right}
+  .match .score{text-align:center}
+  .match .vs{text-align:center;color:var(--muted);font-size:12px}
+  .pts{color:var(--green);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  tr.me{background:var(--green-glow)}
+  .rank{font-family:var(--display);font-size:20px;width:40px}
+  .badge{display:inline-block;background:var(--panel2);border:1px solid var(--line);
+    padding:3px 8px;border-radius:6px;font-size:11px;color:var(--muted);margin:2px}
+  .scoring-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.scoring-grid{grid-template-columns:1fr}
+    .match{grid-template-columns:1fr 50px 10px 50px 1fr}}
+  .scoring-item{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+  .scoring-item.hi{border-color:var(--green);box-shadow:0 0 0 1px var(--green-glow)}
+  .scoring-item small{color:var(--muted);display:block;font-size:11px}
+  .tag{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:600}
+  .tag.open{background:var(--green-glow);color:var(--green)}
+  .tag.locked{background:rgba(239,68,68,.15);color:var(--bad)}
+  .note{font-size:12px;color:var(--muted);margin-top:8px}
+  .player-pick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  @media(max-width:640px){.player-pick{grid-template-columns:1fr}}
+  .total{font-family:var(--display);font-size:40px;color:var(--green)}
+  hr{border:none;border-top:1px solid var(--line);margin:18px 0}
+  .pill{display:inline-flex;gap:6px;align-items:center;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>VM-TIPSET 2026</h1>
+    <p>Tippa matcher, slutspelsträd och målskyttar — samla poäng mot dina vänner</p>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+
+  <!-- REGLER -->
+  <section id="view-rules">
+    <div class="panel">
+      <h2>Poängsystem</h2>
+      <div class="sub">Så räknas poängen ut</div>
+      <div class="scoring-grid">
+        <div>
+          <h3 style="font-size:16px;margin-bottom:10px">⊙ Matchresultat</h3>
+          <div class="scoring-item"><div>Rätt utfall (1X2)<small>Rätt vinnare eller oavgjort</small></div><span class="pts">3 p</span></div>
+          <div class="scoring-item" style="margin-top:8px"><div>Rätt hemmaresultat<small>Pricka hemmalagets exakta målantal</small></div><span class="pts">2 p</span></div>
+          <div class="scoring-item" style="margin-top:8px"><div>Rätt bortaresultat<small>Pricka bortalagets exakta målantal</small></div><span class="pts">2 p</span></div>
+          <div class="scoring-item hi" style="margin-top:8px"><div>Perfekt tips<small>Allt rätt: 3 + 2 + 2</small></div><span class="pts">7 p</span></div>
+        </div>
+        <div>
+          <h3 style="font-size:16px;margin-bottom:10px">⑂ Slutspelsträd (rätt lag)</h3>
+          <div class="scoring-item"><div>16-delsfinal</div><span class="pts">3 p/lag</span></div>
+          <div class="scoring-item" style="margin-top:8px"><div>Åttondelsfinal</div><span class="pts">6 p/lag</span></div>
+          <div class="scoring-item" style="margin-top:8px"><div>Kvartsfinal</div><span class="pts">9 p/lag</span></div>
+          <div class="scoring-item" style="margin-top:8px"><div>Semifinal</div><span class="pts">12 p/lag</span></div>
+          <div class="scoring-item hi" style="margin-top:8px"><div>Final</div><span class="pts">15 p/lag</span></div>
+        </div>
+      </div>
+      <hr>
+      <h3 style="font-size:16px;margin-bottom:10px">★ Turneringsbonusar</h3>
+      <div class="scoring-grid">
+        <div class="scoring-item"><div>Världsmästare<small>Vilket lag vinner VM 2026</small></div><span class="pts">30 p</span></div>
+        <div class="scoring-item"><div>Skyttekung<small>Flest mål i VM</small></div><span class="pts">25 p</span></div>
+        <div class="scoring-item"><div>Assistkung<small>Flest assist</small></div><span class="pts">25 p</span></div>
+        <div class="scoring-item"><div>Totalt antal mål<small>Gissa totala antalet mål</small></div><span class="pts">20 p</span></div>
+      </div>
+      <div class="note">Slutspelet har två spår: du får <b>resultatpoäng</b> för matchplatsen (oavsett vilka lag som spelar) <b>plus lagpoäng</b> för varje lag du placerat i rätt runda.</div>
+    </div>
+  </section>
+
+  <!-- DELTAGARE -->
+  <section id="view-players" class="hide">
+    <div class="panel">
+      <h2>Vem tippar?</h2>
+      <div class="sub">Lägg till alla i kompisligan. Välj sedan vem du är.</div>
+      <div class="row">
+        <input id="newPlayer" placeholder="Namn..." style="flex:1;min-width:160px">
+        <button class="btn" onclick="addPlayer()">Lägg till</button>
+      </div>
+      <hr>
+      <div id="playerList"></div>
+      <hr>
+      <label>Jag är:</label>
+      <select id="meSelect" onchange="setMe()"></select>
+    </div>
+  </section>
+
+  <!-- TIPS -->
+  <section id="view-tips" class="hide">
+    <div class="panel">
+      <h2 id="tipsTitle">Mitt tips</h2>
+      <div class="sub" id="phaseLine"></div>
+      <div class="row" style="margin-bottom:14px">
+        <span class="pill">Fas:</span>
+        <button class="btn ghost" id="phaseBtn" onclick="togglePhase()">Förhandstips</button>
+        <span id="phaseTag"></span>
+      </div>
+
+      <h3 style="font-size:15px;margin:16px 0 4px">⚽ Matcher</h3>
+      <div id="matchTips"></div>
+
+      <h3 style="font-size:15px;margin:20px 0 4px">★ Mina 3 målskyttar</h3>
+      <div class="player-pick" id="scorerPicks"></div>
+      <div class="note">Varje vald spelare ger poäng per mål de gör i turneringen (se Inställningar).</div>
+
+      <h3 style="font-size:15px;margin:20px 0 4px">🏆 Turneringsbonusar</h3>
+      <label>Världsmästare</label><input id="champ" placeholder="t.ex. Brasilien">
+      <label>Skyttekung</label><input id="topscorer" placeholder="Spelarnamn">
+      <label>Totalt antal mål i turneringen</label><input id="totalgoals" type="number" placeholder="t.ex. 160">
+
+      <hr>
+      <button class="btn" onclick="saveTip()">💾 Spara mitt tips</button>
+      <span class="note" id="saveMsg"></span>
+    </div>
+  </section>
+
+  <!-- ADMIN: facit -->
+  <section id="view-admin" class="hide">
+    <div class="panel">
+      <h2>Facit (admin)</h2>
+      <div class="sub">Fyll i de riktiga resultaten — poängen räknas ut automatiskt.</div>
+      <div id="adminMatches"></div>
+      <hr>
+      <label>Världsmästare (facit)</label><input id="aChamp">
+      <label>Skyttekung (facit)</label><input id="aTop">
+      <label>Totalt antal mål (facit)</label><input id="aGoals" type="number">
+      <label>Målgjorda per spelare (namn:mål, ett per rad)</label>
+      <textarea id="aScorers" rows="4" style="width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px;font-family:var(--body)" placeholder="Mbappé:6&#10;Haaland:4"></textarea>
+      <hr>
+      <button class="btn" onclick="saveFacit()">💾 Spara facit</button>
+    </div>
+  </section>
+
+  <!-- TABELL -->
+  <section id="view-table" class="hide">
+    <div class="panel">
+      <h2>Topplista</h2>
+      <div class="sub">Live-ställning baserat på facit</div>
+      <table><thead><tr><th>#</th><th>Spelare</th><th>Match</th><th>Bonus</th><th>Totalt</th></tr></thead>
+      <tbody id="leaderboard"></tbody></table>
+    </div>
+  </section>
+
+  <!-- INSTÄLLNINGAR -->
+  <section id="view-settings" class="hide">
+    <div class="panel">
+      <h2>Inställningar</h2>
+      <label>Poäng per mål för vald målskytt</label>
+      <input id="goalPts" type="number" value="1">
+      <hr>
+      <label>Lås tips (deadline) — när detta är på kan ingen ändra sitt tips</label>
+      <div class="row"><button class="btn ghost" onclick="toggleLock()" id="lockBtn">Tips: ÖPPNA</button></div>
+      <hr>
+      <button class="btn ghost" onclick="exportData()">⬇ Exportera all data (backup)</button>
+      <label style="margin-top:14px">Importera data (klistra in JSON)</label>
+      <textarea id="importBox" rows="3" style="width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:10px"></textarea>
+      <button class="btn ghost" style="margin-top:8px" onclick="importData()">⬆ Importera</button>
+      <hr>
+      <button class="btn ghost" style="border-color:var(--bad);color:var(--bad)" onclick="resetAll()">🗑 Nollställ allt</button>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ============ DATA ============ */
+// Exempelmatcher — byt ut mot riktiga VM-matcher när lottningen är klar.
+const GROUP_MATCHES = [
+  ["Mexiko","Sydafrika"],["Kanada","Nigeria"],["USA","Wales"],
+  ["Argentina","Japan"],["Frankrike","Senegal"],["Brasilien","Australien"],
+  ["England","Marocko"],["Spanien","Sydkorea"]
+];
+// Slutspelsplatser med poängvärde per lag
+const KO_ROUNDS = [
+  {key:"r32",name:"16-delsfinal",slots:16,ptsPerTeam:3,matches:8},
+  {key:"r16",name:"Åttondelsfinal",slots:8,ptsPerTeam:6,matches:4},
+  {key:"qf", name:"Kvartsfinal",slots:4,ptsPerTeam:9,matches:2},
+  {key:"sf", name:"Semifinal",slots:2,ptsPerTeam:12,matches:1},
+  {key:"final",name:"Final",slots:2,ptsPerTeam:15,matches:1}
+];
+
+const DB_KEY = "vmtipset2026";
+let db = load();
+
+function load(){
+  try{ return JSON.parse(localStorage.getItem(DB_KEY)) || fresh(); }
+  catch(e){ return fresh(); }
+}
+function fresh(){
+  return { players:[], me:null, tips:{}, facit:{matches:{},champ:"",top:"",goals:"",scorers:{}},
+           settings:{goalPts:1, locked:false} };
+}
+function save(){ localStorage.setItem(DB_KEY, JSON.stringify(db)); }
+
+/* ============ NAV ============ */
+const VIEWS = [
+  ["rules","Regler"],["players","Deltagare"],["tips","Tippa"],
+  ["admin","Facit"],["table","Topplista"],["settings","Inställningar"]
+];
+function buildTabs(){
+  const t = document.getElementById("tabs"); t.innerHTML="";
+  VIEWS.forEach(([id,label],i)=>{
+    const b=document.createElement("button");
+    b.className="tab"+(i===0?" active":""); b.textContent=label;
+    b.onclick=()=>show(id,b); t.appendChild(b);
+  });
+}
+function show(id,btn){
+  VIEWS.forEach(([v])=>document.getElementById("view-"+v).classList.add("hide"));
+  document.getElementById("view-"+id).classList.remove("hide");
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+  if(id==="players") renderPlayers();
+  if(id==="tips") renderTips();
+  if(id==="admin") renderAdmin();
+  if(id==="table") renderTable();
+  if(id==="settings") renderSettings();
+}
+
+/* ============ PLAYERS ============ */
+function addPlayer(){
+  const i=document.getElementById("newPlayer"); const n=i.value.trim();
+  if(!n) return;
+  if(!db.players.includes(n)) db.players.push(n);
+  if(!db.me) db.me=n;
+  i.value=""; save(); renderPlayers();
+}
+function renderPlayers(){
+  const list=document.getElementById("playerList"); list.innerHTML="";
+  db.players.forEach(p=>{
+    const span=document.createElement("span"); span.className="badge";
+    span.textContent=p+"  ✕"; span.style.cursor="pointer";
+    span.onclick=()=>{ db.players=db.players.filter(x=>x!==p);
+      if(db.me===p) db.me=db.players[0]||null; save(); renderPlayers(); };
+    list.appendChild(span);
+  });
+  const sel=document.getElementById("meSelect"); sel.innerHTML="";
+  db.players.forEach(p=>{ const o=document.createElement("option");
+    o.value=p;o.textContent=p; if(p===db.me)o.selected=true; sel.appendChild(o); });
+}
+function setMe(){ db.me=document.getElementById("meSelect").value; save(); }
+
+/* ============ TIPS ============ */
+let currentPhase = "pre"; // pre | group
+function tipKey(){ return db.me ? db.me+"|"+currentPhase : null; }
+function togglePhase(){
+  currentPhase = currentPhase==="pre" ? "group" : "pre";
+  renderTips();
+}
+function renderTips(){
+  if(!db.me){ document.getElementById("tipsTitle").textContent="Lägg till dig själv under Deltagare först"; 
+    document.getElementById("matchTips").innerHTML=""; return; }
+  document.getElementById("tipsTitle").textContent="Tips: "+db.me;
+  document.getElementById("phaseBtn").textContent = currentPhase==="pre" ? "Förhandstips (före VM)" : "Omtippning (efter gruppspel)";
+  document.getElementById("phaseLine").textContent = currentPhase==="pre"
+    ? "Förutspå hela turneringen innan en boll har sparkats."
+    : "Gruppspelet är klart — fyll i på nytt för att samla poäng i slutspelet.";
+  const locked = db.settings.locked;
+  document.getElementById("phaseTag").innerHTML = locked
+    ? '<span class="tag locked">LÅST</span>' : '<span class="tag open">ÖPPET</span>';
+
+  const t = db.tips[tipKey()] || {matches:{},scorers:["","",""],champ:"",top:"",goals:""};
+  // Matches
+  const mc=document.getElementById("matchTips"); mc.innerHTML="";
+  GROUP_MATCHES.forEach((m,idx)=>{
+    const v=t.matches[idx]||{h:"",a:""};
+    const row=document.createElement("div"); row.className="match";
+    row.innerHTML=`<div class="team">${m[0]}</div>
+      <div class="score"><input type="number" min="0" value="${v.h}" data-i="${idx}" data-s="h" ${locked?'disabled':''}></div>
+      <div class="vs">–</div>
+      <div class="score"><input type="number" min="0" value="${v.a}" data-i="${idx}" data-s="a" ${locked?'disabled':''}></div>
+      <div class="team away">${m[1]}</div>`;
+    mc.appendChild(row);
+  });
+  // Scorers
+  const sp=document.getElementById("scorerPicks"); sp.innerHTML="";
+  for(let i=0;i<3;i++){
+    const inp=document.createElement("input");
+    inp.placeholder="Målskytt "+(i+1); inp.value=(t.scorers&&t.scorers[i])||"";
+    inp.dataset.scorer=i; if(locked) inp.disabled=true; sp.appendChild(inp);
+  }
+  document.getElementById("champ").value=t.champ||"";
+  document.getElementById("topscorer").value=t.top||"";
+  document.getElementById("totalgoals").value=t.goals||"";
+  [...document.querySelectorAll("#view-tips input")].forEach(x=>{ if(locked) x.disabled=true;});
+}
+function saveTip(){
+  if(!db.me) return;
+  if(db.settings.locked){ msg("Tipsen är låsta."); return; }
+  const t={matches:{},scorers:["","",""]};
+  document.querySelectorAll("#matchTips input").forEach(inp=>{
+    const i=inp.dataset.i,s=inp.dataset.s;
+    t.matches[i]=t.matches[i]||{h:"",a:""}; t.matches[i][s]=inp.value;
+  });
+  document.querySelectorAll("#scorerPicks input").forEach(inp=>{
+    t.scorers[inp.dataset.scorer]=inp.value.trim();
+  });
+  t.champ=document.getElementById("champ").value.trim();
+  t.top=document.getElementById("topscorer").value.trim();
+  t.goals=document.getElementById("totalgoals").value;
+  db.tips[tipKey()]=t; save(); msg("Sparat! ✔");
+}
+function msg(s){ const e=document.getElementById("saveMsg"); e.textContent=s; setTimeout(()=>e.textContent="",2500); }
+
+/* ============ ADMIN / FACIT ============ */
+function renderAdmin(){
+  const c=document.getElementById("adminMatches"); c.innerHTML="";
+  GROUP_MATCHES.forEach((m,idx)=>{
+    const v=db.facit.matches[idx]||{h:"",a:""};
+    const row=document.createElement("div"); row.className="match";
+    row.innerHTML=`<div class="team">${m[0]}</div>
+      <div class="score"><input type="number" min="0" value="${v.h}" data-fi="${idx}" data-fs="h"></div>
+      <div class="vs">–</div>
+      <div class="score"><input type="number" min="0" value="${v.a}" data-fi="${idx}" data-fs="a"></div>
+      <div class="team away">${m[1]}</div>`;
+    c.appendChild(row);
+  });
+  document.getElementById("aChamp").value=db.facit.champ||"";
+  document.getElementById("aTop").value=db.facit.top||"";
+  document.getElementById("aGoals").value=db.facit.goals||"";
+  document.getElementById("aScorers").value=
+    Object.entries(db.facit.scorers||{}).map(([k,v])=>k+":"+v).join("\n");
+}
+function saveFacit(){
+  const f={matches:{},champ:"",top:"",goals:"",scorers:{}};
+  document.querySelectorAll("#adminMatches input").forEach(inp=>{
+    const i=inp.dataset.fi,s=inp.dataset.fs;
+    f.matches[i]=f.matches[i]||{h:"",a:""}; f.matches[i][s]=inp.value;
+  });
+  f.champ=document.getElementById("aChamp").value.trim();
+  f.top=document.getElementById("aTop").value.trim();
+  f.goals=document.getElementById("aGoals").value;
+  document.getElementById("aScorers").value.split("\n").forEach(line=>{
+    const p=line.split(":"); if(p.length===2&&p[0].trim())
+      f.scorers[p[0].trim()]=parseInt(p[1])||0;
+  });
+  db.facit=f; save(); alert("Facit sparat!");
+}
+
+/* ============ SCORING ============ */
+// Matchpoäng enligt vmtipset: utfall 3, hemma 2, borta 2 (perfekt = 7)
+function matchPoints(tip,fac){
+  if(!fac||fac.h===""||fac.a==="") return 0;
+  if(!tip||tip.h===""||tip.a==="") return 0;
+  const th=+tip.h,ta=+tip.a,fh=+fac.h,fa=+fac.a; let p=0;
+  const out=(x,y)=>x>y?"1":x<y?"2":"X";
+  if(out(th,ta)===out(fh,fa)) p+=3;
+  if(th===fh) p+=2;
+  if(ta===fa) p+=2;
+  return p;
+}
+function calcScore(player){
+  // använd förhandstips om det finns, annars gruppfas
+  const t = db.tips[player+"|pre"] || db.tips[player+"|group"];
+  if(!t) return {match:0,bonus:0,total:0};
+  let match=0, bonus=0;
+  GROUP_MATCHES.forEach((m,idx)=> match+=matchPoints(t.matches[idx],db.facit.matches[idx]));
+  // målskyttar
+  const gp=+db.settings.goalPts||1;
+  (t.scorers||[]).forEach(s=>{ if(s&&db.facit.scorers[s]) bonus+=db.facit.scorers[s]*gp; });
+  // bonusar
+  if(t.champ&&db.facit.champ&&t.champ.toLowerCase()===db.facit.champ.toLowerCase()) bonus+=30;
+  if(t.top&&db.facit.top&&t.top.toLowerCase()===db.facit.top.toLowerCase()) bonus+=25;
+  if(t.goals!==""&&db.facit.goals!==""&&+t.goals===+db.facit.goals) bonus+=20;
+  return {match,bonus,total:match+bonus};
+}
+function renderTable(){
+  const tb=document.getElementById("leaderboard"); tb.innerHTML="";
+  const rows=db.players.map(p=>({p,...calcScore(p)})).sort((a,b)=>b.total-a.total);
+  if(!rows.length){ tb.innerHTML='<tr><td colspan="5" style="color:var(--muted)">Inga deltagare än.</td></tr>'; return; }
+  rows.forEach((r,i)=>{
+    const tr=document.createElement("tr"); if(r.p===db.me) tr.className="me";
+    tr.innerHTML=`<td class="rank">${i+1}</td><td>${r.p}</td>
+      <td>${r.match}</td><td>${r.bonus}</td><td class="pts">${r.total}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+/* ============ SETTINGS ============ */
+function renderSettings(){
+  document.getElementById("goalPts").value=db.settings.goalPts;
+  document.getElementById("lockBtn").textContent="Tips: "+(db.settings.locked?"LÅSTA":"ÖPPNA");
+  document.getElementById("goalPts").onchange=e=>{db.settings.goalPts=+e.target.value;save();};
+}
+function toggleLock(){ db.settings.locked=!db.settings.locked; save(); renderSettings(); }
+function exportData(){
+  navigator.clipboard.writeText(JSON.stringify(db));
+  alert("Data kopierad till urklipp! Klistra in i en textfil som backup.");
+}
+function importData(){
+  try{ db=JSON.parse(document.getElementById("importBox").value); save();
+    alert("Importerat!"); location.reload(); }
+  catch(e){ alert("Ogiltig JSON."); }
+}
+function resetAll(){ if(confirm("Radera ALLT?")){ db=fresh(); save(); location.reload(); } }
+
+/* ============ INIT ============ */
+buildTabs();
+</script>
+</body>
+</html>
