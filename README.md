@@ -52,10 +52,28 @@ API-anrop sker **bara server-side** (nyckeln exponeras aldrig i webbläsaren). S
 ```
 USE_MOCK_DATA=false
 API_FOOTBALL_KEY=<din nyckel från api-football.com>
+WC_LEAGUE_ID=1      # VM = league 1 i api-football
+WC_SEASON=2026
 ```
-Kör på en server där `v3.football.api-sports.io` är tillåten i nätverket. Kör sedan
-`node scripts/sync.js` (eller "Hämta matcher" i admin-vyn) för att hämta riktiga grupper, matcher
-och resultat. **Committa aldrig den riktiga nyckeln** – `.env` är gitignorerad.
+
+**1. Validera anslutningen** (körs på en server där `v3.football.api-sports.io` är tillåten):
+```bash
+node scripts/checkApi.js
+```
+Verktyget testar nyckeln via `/status` (visar plan + förbrukade anrop) och kontrollerar att
+grupper, matcher, slutspelsrundor (att round-namnen mappar rätt) och målgörare finns för
+`WC_LEAGUE_ID`/`WC_SEASON`. Rätta till nyckel/league/season tills allt visar ✓.
+
+**2. Hämta in datan:**
+```bash
+node scripts/sync.js          # eller knappen "Hämta matcher" i admin-vyn
+```
+Kör `sync` regelbundet (t.ex. cron) under turneringen så uppdateras resultat, slutspelsträd,
+målgörarstatistik och alla poäng automatiskt.
+
+> ⚠️ **Säkerhet:** Den API-nyckel som delats i klartext bör **bytas ut** i api-football-panelen.
+> Committa aldrig den riktiga nyckeln – `.env` är gitignorerad. Datatillgång för VM 2026 beror på
+> din API-plan och att turneringen hunnit lottas/spelas.
 
 ## Struktur
 - `server.js`, `db.js`, `schema.sql` – server, databas, schema
@@ -68,7 +86,7 @@ och resultat. **Committa aldrig den riktiga nyckeln** – `.env` är gitignorera
 - `routes/` – `auth`, `leagues`, `predictions`, `bracket`, `scorers`, `bonus`, `admin`
 - `public/` – frontend (`index.html`, `app.js`, `styles.css`, `rules.html`)
 - `seed/` – exempeldata i api-footballs format
-- `scripts/` – `createAdmin.js`, `sync.js`, `genSeed.js`
+- `scripts/` – `createAdmin.js`, `sync.js`, `genSeed.js`, `checkApi.js` (validera live-API)
 
 Tester: `npm test`.
 
