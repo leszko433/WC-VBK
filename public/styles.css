@@ -168,6 +168,21 @@ input:focus { outline: none; border-color: var(--green); }
 .prow .pstat { color: var(--muted); font-size: 13px; }
 .prow .pstat b { color: var(--green); }
 
+/* Bonus */
+.bonusgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 600px) { .bonusgrid { grid-template-columns: 1fr; } }
+.bonusgrid select { width: 100%; margin-top: 6px; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--border); background: #0c1d2e; color: var(--text); font-size: 15px; }
+.bonusgrid select:disabled, .bonusgrid input:disabled { opacity: .6; }
+.qcard { border: 1px solid var(--border); border-radius: 10px; padding: 13px 14px; margin-bottom: 10px; background: var(--card2); }
+.qcard .qtext { font-weight: 600; margin-bottom: 8px; }
+.qcard .qpts { color: var(--green); font-weight: 700; }
+.qcard .qrow { display: flex; gap: 8px; align-items: center; }
+.qcard .qrow input, .qcard .qrow select { margin: 0; }
+.qcard .resolved { font-size: 13px; margin-top: 7px; }
+.qcard .resolved .ok { color: var(--green); }
+.qcard .resolved .no { color: #f87171; }
+
 /* Leaderboard */
 .board { width: 100%; border-collapse: collapse; }
 .board th, .board td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); }

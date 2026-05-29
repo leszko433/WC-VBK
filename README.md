@@ -24,7 +24,13 @@ Maxpoäng slutspelsträd = 32×3 + 16×6 + 8×9 + 4×12 + 2×15 = **342**.
 **Personliga målgörare:** välj upp till 3 spelare som ger **3 p per mål** och **1 p per assist**
 (från api-footballs topplistor), låses när turneringen börjar.
 
-Hela regelverket finns på `/rules.html`. Världsmästare (30 p) m.m. rullas ut enligt roadmappen.
+**Turneringsbonusar:** Världsmästare **30 p**, Skyttekung **25 p**, Assistkung **25 p**, Totalt
+antal mål **20 p** (exakt gissning). Tippas innan turneringen startar.
+
+**Egna bonusfrågor:** ligaadmin skapar frågor värda **1–100 p** (fritext eller flervals), avgör
+rätt svar och poängen delas ut automatiskt till matchande svar.
+
+Hela regelverket finns på `/rules.html`.
 
 ## Kom igång (lokalt)
 ```bash
@@ -56,8 +62,10 @@ och resultat. **Committa aldrig den riktiga nyckeln** – `.env` är gitignorera
 - `lib/scoring.js` – ren matchpoänglogik (enhetstestad i `test/`)
 - `lib/bracket.js` – slutspelsträdets två poängspår + kvalificering (enhetstestad)
 - `lib/scorers.js` – personliga målgörare: import + poäng (mål 3 p, assist 1 p)
+- `lib/bonus.js` – turneringsbonusar + bonusfrågor (poänglogik, enhetstestad)
+- `lib/phase.js` – faslägen (turnering startad / gruppspel klart) för låsning
 - `lib/apiFootball.js` – api-football-klient (mock/live), `lib/importData.js`, `lib/recompute.js`
-- `routes/` – `auth`, `leagues`, `predictions`, `bracket`, `scorers`, `admin`
+- `routes/` – `auth`, `leagues`, `predictions`, `bracket`, `scorers`, `bonus`, `admin`
 - `public/` – frontend (`index.html`, `app.js`, `styles.css`, `rules.html`)
 - `seed/` – exempeldata i api-footballs format
 - `scripts/` – `createAdmin.js`, `sync.js`, `genSeed.js`
@@ -68,7 +76,12 @@ Tester: `npm test`.
 - [x] Matchtippning + poäng + topplista
 - [x] Slutspelsträd med fast slutspelsnyckel (resultat- + lag-spår) och kvalificering
 - [x] 3 personliga målgörare (mål 3 p + assist 1 p), från api-footballs topplistor
-- [ ] Två tippningsfönster (för-VM + efter gruppspel) som separata, låsbara faser
+- [x] Turneringsbonusar (världsmästare, skyttekung, assistkung, totalt antal mål)
+- [x] Egna bonusfrågor (ligaadmin, 1–100 p)
+- [~] Två tippningsfönster: slutspelsträdets två poängspår (resultat per slot + rätt lag) ger
+      "samla poäng igen"-mekaniken; slutspelet kan fyllas i på nytt tills varje match låses.
+      En fullt separat fas-snapshot (för-VM-tips kontra efter-gruppspel-tips räknas var för sig)
+      återstår om ni vill ha det.
 - [ ] Turneringsbonusar (världsmästare, skyttekung, assistkung, totalt antal mål)
 - [ ] Egna bonusfrågor (ligaadmin, 1–100 p)
 

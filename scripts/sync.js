@@ -4,6 +4,7 @@ const { syncAll } = require('../lib/importData');
 const { recomputeAll, lockStartedMatches } = require('../lib/recompute');
 const bracket = require('../lib/bracket');
 const scorers = require('../lib/scorers');
+const bonus = require('../lib/bonus');
 
 (async () => {
   const counts = await syncAll();
@@ -11,6 +12,8 @@ const scorers = require('../lib/scorers');
   const bracketRescored = bracket.recomputeAllBracket();
   bracket.recomputeQualification();
   const scorersRescored = scorers.recomputeScorers();
+  bonus.recomputeTournament();
+  bonus.recomputeAllQuestions();
   const locked = lockStartedMatches() + bracket.lockStartedBracket();
   console.log('Synced:', counts, '| match tips:', rescored, '| bracket tips:', bracketRescored, '| scorer tips:', scorersRescored, '| locked:', locked);
 })().catch((e) => {

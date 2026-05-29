@@ -117,13 +117,15 @@ router.get('/:id/leaderboard', (req, res) => {
          (SELECT COALESCE(SUM(p.points),0) FROM predictions p WHERE p.user_id = u.id AND p.league_id = lm.league_id) AS match_points,
          (SELECT COALESCE(SUM(b.points_result + b.points_advance),0) FROM bracket_predictions b WHERE b.user_id = u.id AND b.league_id = lm.league_id) AS bracket_points,
          (SELECT COALESCE(SUM(q.points),0) FROM qualifier_picks q WHERE q.user_id = u.id AND q.league_id = lm.league_id) AS qual_points,
-         (SELECT COALESCE(SUM(sc.points),0) FROM scorer_picks sc WHERE sc.user_id = u.id AND sc.league_id = lm.league_id) AS scorer_points
+         (SELECT COALESCE(SUM(sc.points),0) FROM scorer_picks sc WHERE sc.user_id = u.id AND sc.league_id = lm.league_id) AS scorer_points,
+         (SELECT COALESCE(SUM(tp.pts_champion + tp.pts_scorer + tp.pts_assist + tp.pts_goals),0) FROM tournament_picks tp WHERE tp.user_id = u.id AND tp.league_id = lm.league_id) AS tournament_points,
+         (SELECT COALESCE(SUM(ba.points),0) FROM bonus_answers ba JOIN bonus_questions bq ON bq.id = ba.question_id WHERE ba.user_id = u.id AND bq.league_id = lm.league_id) AS question_points
        FROM league_members lm
        JOIN users u ON u.id = lm.user_id
        WHERE lm.league_id = ?`
     )
     .all(leagueId)
-    .map((r) => ({ ...r, points: r.match_points + r.bracket_points + r.qual_points + r.scorer_points }))
+    .map((r) => ({ ...r, points: r.match_points + r.bracket_points + r.qual_points + r.scorer_points + r.tournament_points + r.question_points }))
     .sort((a, b) => b.points - a.points || a.display_name.localeCompare(b.display_name));
   res.json(rows);
 });

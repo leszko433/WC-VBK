@@ -144,8 +144,9 @@ function switchLeagueTab(tab) {
   $('#ltab-' + tab).classList.remove('hidden');
   if (tab === 'bracket') loadBracket();
   if (tab === 'scorers') loadScorers();
+  if (tab === 'bonus') loadBonus();
   if (tab === 'leaderboard') loadLeaderboard();
-  if (tab === 'admin') loadInvites();
+  if (tab === 'admin') { loadInvites(); loadAdminQuestions(); }
 }
 
 function fmtKick(iso) {
@@ -427,6 +428,151 @@ $('#saveScorersBtn').addEventListener('click', async () => {
     loadScorers();
   } catch (err) { msg($('#scorerMsg'), err.message); }
 });
+
+/* ---------- Bonus: tournament bonuses + custom questions ---------- */
+let tournamentData = null;
+
+async function loadBonus() {
+  tournamentData = await api.get(`/api/leagues/${state.leagueId}/tournament`);
+  renderTournament();
+  loadQuestions();
+}
+
+function fillSelect(sel, items, valueKey, labelFn, current) {
+  sel.innerHTML = '<option value="">— välj —</option>';
+  items.forEach((it) => {
+    const o = document.createElement('option');
+    o.value = it[valueKey];
+    o.textContent = labelFn(it);
+    if (current != null && Number(current) === it[valueKey]) o.selected = true;
+    sel.appendChild(o);
+  });
+}
+
+function renderTournament() {
+  const d = tournamentData, mp = d.myPicks || {};
+  fillSelect($('#tpChampion'), d.teams, 'id', (t) => `${t.flag || ''} ${t.name}`, mp.champion_team_id);
+  fillSelect($('#tpScorer'), d.players, 'id', (p) => `${p.name} (${p.goals} mål)`, mp.top_scorer_id);
+  fillSelect($('#tpAssist'), d.players, 'id', (p) => `${p.name} (${p.assists} assist)`, mp.top_assist_id);
+  $('#tpGoals').value = mp.total_goals != null ? mp.total_goals : '';
+  ['#tpChampion', '#tpScorer', '#tpAssist', '#tpGoals'].forEach((s) => { $(s).disabled = d.locked; });
+  $('#saveTournamentBtn').disabled = d.locked;
+  $('#bonusLockMsg').textContent = d.locked
+    ? '🔒 Låst – turneringen har börjat.'
+    : 'Tippa innan turneringen startar. Mål 30/25/25/20 p.';
+  // Facit / current leaders
+  const a = d.actuals || {};
+  const tName = (id) => (d.teams.find((t) => t.id === id) || {}).name;
+  const pName = (id) => (d.players.find((p) => p.id === id) || {}).name;
+  const parts = [];
+  if (a.top_scorer_id) parts.push(`Skytteliga: <b>${esc(pName(a.top_scorer_id) || '')}</b>`);
+  if (a.top_assist_id) parts.push(`Assistliga: <b>${esc(pName(a.top_assist_id) || '')}</b>`);
+  if (a.champion_team_id) parts.push(`Mästare: <b>${esc(tName(a.champion_team_id) || '')}</b>`);
+  parts.push(`Mål hittills: <b>${a.total_goals || 0}</b>`);
+  $('#tournamentFacit').innerHTML = parts.length ? 'Status: ' + parts.join(' · ') : '';
+}
+
+$('#saveTournamentBtn').addEventListener('click', async () => {
+  try {
+    await api.post(`/api/leagues/${state.leagueId}/tournament`, {
+      championTeamId: $('#tpChampion').value || null,
+      topScorerId: $('#tpScorer').value || null,
+      topAssistId: $('#tpAssist').value || null,
+      totalGoals: $('#tpGoals').value || null,
+    });
+    msg($('#tournamentMsg'), 'Sparat!', true);
+    loadBonus();
+  } catch (err) { msg($('#tournamentMsg'), err.message); }
+});
+
+async function loadQuestions() {
+  const qs = await api.get(`/api/leagues/${state.leagueId}/questions`);
+  const wrap = $('#questionList');
+  wrap.innerHTML = '';
+  $('#noQuestions').classList.toggle('hidden', qs.length > 0);
+  qs.forEach((q) => wrap.appendChild(renderQuestion(q)));
+}
+
+function renderQuestion(q) {
+  const el = document.createElement('div');
+  el.className = 'qcard';
+  let answerCtl;
+  if (q.resolved) {
+    const correct = (q.my_answer || '').trim().toLowerCase() === (q.correct_answer || '').trim().toLowerCase();
+    answerCtl = `<div class="resolved">Ditt svar: <b>${esc(q.my_answer || '—')}</b> ·
+      Rätt: <b>${esc(q.correct_answer)}</b> ·
+      <span class="${correct ? 'ok' : 'no'}">${correct ? '+' + q.my_points + ' p' : '0 p'}</span></div>`;
+  } else if (q.options) {
+    const opts = q.options.map((o) => `<option ${q.my_answer === o ? 'selected' : ''}>${esc(o)}</option>`).join('');
+    answerCtl = `<div class="qrow"><select data-q="${q.id}"><option value="">— välj —</option>${opts}</select>
+      <button class="btn small" data-answer="${q.id}">Svara</button></div>`;
+  } else {
+    answerCtl = `<div class="qrow"><input data-q="${q.id}" value="${esc(q.my_answer || '')}" placeholder="Ditt svar" />
+      <button class="btn small" data-answer="${q.id}">Svara</button></div>`;
+  }
+  el.innerHTML = `<div class="qtext">${esc(q.text)} <span class="qpts">${q.points} p</span></div>${answerCtl}`;
+  const btn = el.querySelector('[data-answer]');
+  if (btn) btn.addEventListener('click', async () => {
+    const answer = el.querySelector(`[data-q="${q.id}"]`).value;
+    try {
+      await api.post(`/api/leagues/${state.leagueId}/questions/${q.id}/answer`, { answer });
+      btn.textContent = '✓';
+    } catch (err) { alert(err.message); }
+  });
+  return el;
+}
+
+/* ---------- League admin: bonus questions ---------- */
+$('#questionForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const options = f.options.value.split(',').map((s) => s.trim()).filter(Boolean);
+  try {
+    await api.post(`/api/admin/leagues/${state.leagueId}/questions`, {
+      text: f.text.value, points: Number(f.points.value), options,
+    });
+    f.reset();
+    msg($('#questionFormMsg'), 'Fråga skapad', true);
+    loadAdminQuestions();
+  } catch (err) { msg($('#questionFormMsg'), err.message); }
+});
+
+async function loadAdminQuestions() {
+  const qs = await api.get(`/api/leagues/${state.leagueId}/questions`);
+  const wrap = $('#adminQuestionList');
+  wrap.innerHTML = '';
+  qs.forEach((q) => {
+    const el = document.createElement('div');
+    el.className = 'qcard';
+    if (q.resolved) {
+      el.innerHTML = `<div class="qtext">${esc(q.text)} <span class="qpts">${q.points} p</span></div>
+        <div class="resolved ok">Avgjord — rätt svar: <b>${esc(q.correct_answer)}</b></div>`;
+    } else {
+      const ctl = q.options
+        ? `<select data-resolve="${q.id}"><option value="">— rätt svar —</option>${q.options.map((o) => `<option>${esc(o)}</option>`).join('')}</select>`
+        : `<input data-resolve="${q.id}" placeholder="Rätt svar" />`;
+      el.innerHTML = `<div class="qtext">${esc(q.text)} <span class="qpts">${q.points} p</span></div>
+        <div class="qrow">${ctl}
+          <button class="btn primary small" data-resolvebtn="${q.id}">Avgör & dela ut</button>
+          <button class="btn ghost small" data-delq="${q.id}">Ta bort</button></div>`;
+    }
+    wrap.appendChild(el);
+  });
+  $$('[data-resolvebtn]').forEach((b) => b.addEventListener('click', async () => {
+    const id = b.dataset.resolvebtn;
+    const correctAnswer = $(`[data-resolve="${id}"]`).value;
+    try {
+      const r = await api.post(`/api/admin/questions/${id}/resolve`, { correctAnswer });
+      b.textContent = `✓ (${r.answers_scored})`;
+      loadAdminQuestions();
+    } catch (err) { alert(err.message); }
+  }));
+  $$('[data-delq]').forEach((b) => b.addEventListener('click', async () => {
+    if (!confirm('Ta bort frågan?')) return;
+    await api.req('DELETE', `/api/admin/questions/${b.dataset.delq}`);
+    loadAdminQuestions();
+  }));
+}
 
 /* ---------- League admin (invites) ---------- */
 $('#inviteForm').addEventListener('submit', async (e) => {

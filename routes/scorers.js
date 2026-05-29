@@ -3,6 +3,7 @@ const express = require('express');
 const db = require('../db');
 const { requireAuth } = require('../lib/auth');
 const scorers = require('../lib/scorers');
+const { tournamentStarted } = require('../lib/phase');
 
 const router = express.Router();
 router.use(requireAuth);
@@ -17,13 +18,6 @@ function ensureMember(req, res) {
     return null;
   }
   return leagueId;
-}
-
-// Scorer picks lock once the tournament has started (any match kicked off).
-function tournamentStarted() {
-  return db
-    .prepare("SELECT COUNT(*) c FROM matches WHERE kickoff IS NOT NULL AND kickoff <= datetime('now')")
-    .get().c > 0;
 }
 
 // GET /api/leagues/:id/scorers — player pool + my picks + point rules

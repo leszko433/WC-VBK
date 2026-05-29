@@ -152,3 +152,44 @@ CREATE TABLE IF NOT EXISTS scorer_picks (
 );
 
 CREATE INDEX IF NOT EXISTS idx_scorer_league ON scorer_picks(league_id);
+
+-- ===== Turneringsbonusar (one row per user per league) =====
+-- Världsmästare 30, Skyttekung 25, Assistkung 25, Totalt antal mål 20.
+CREATE TABLE IF NOT EXISTS tournament_picks (
+  user_id          INTEGER NOT NULL REFERENCES users(id),
+  league_id        INTEGER NOT NULL REFERENCES leagues(id),
+  champion_team_id INTEGER REFERENCES teams(id),
+  top_scorer_id    INTEGER REFERENCES players(id),
+  top_assist_id    INTEGER REFERENCES players(id),
+  total_goals      INTEGER,
+  pts_champion     INTEGER NOT NULL DEFAULT 0,
+  pts_scorer       INTEGER NOT NULL DEFAULT 0,
+  pts_assist       INTEGER NOT NULL DEFAULT 0,
+  pts_goals        INTEGER NOT NULL DEFAULT 0,
+  updated_at       TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (user_id, league_id)
+);
+
+-- ===== Egna bonusfrågor (ligaadmin skapar, 1-100 p) =====
+CREATE TABLE IF NOT EXISTS bonus_questions (
+  id             INTEGER PRIMARY KEY AUTOINCREMENT,
+  league_id      INTEGER NOT NULL REFERENCES leagues(id),
+  text           TEXT NOT NULL,
+  options        TEXT,            -- JSON array of strings (optional, for multiple choice)
+  points         INTEGER NOT NULL,
+  correct_answer TEXT,            -- NULL until the admin resolves the question
+  created_by     INTEGER NOT NULL REFERENCES users(id),
+  created_at     TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS bonus_answers (
+  id          INTEGER PRIMARY KEY AUTOINCREMENT,
+  question_id INTEGER NOT NULL REFERENCES bonus_questions(id),
+  user_id     INTEGER NOT NULL REFERENCES users(id),
+  answer      TEXT NOT NULL,
+  points      INTEGER NOT NULL DEFAULT 0,
+  UNIQUE (question_id, user_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_bq_league ON bonus_questions(league_id);
+CREATE INDEX IF NOT EXISTS idx_ba_question ON bonus_answers(question_id);

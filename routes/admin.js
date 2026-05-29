@@ -7,6 +7,7 @@ const { syncAll } = require('../lib/importData');
 const { recomputeMatch, recomputeAll, lockStartedMatches } = require('../lib/recompute');
 const bracket = require('../lib/bracket');
 const scorers = require('../lib/scorers');
+const bonus = require('../lib/bonus');
 
 const router = express.Router();
 router.use(requireAuth);
@@ -47,6 +48,8 @@ router.post('/sync', requireSiteAdmin, async (req, res) => {
     const bracketRescored = bracket.recomputeAllBracket();
     bracket.recomputeQualification();
     const scorersRescored = scorers.recomputeScorers();
+    bonus.recomputeTournament();
+    bonus.recomputeAllQuestions();
     const locked = lockStartedMatches() + bracket.lockStartedBracket();
     res.json({ ...counts, rescored, bracketRescored, scorersRescored, locked });
   } catch (err) {
@@ -91,7 +94,58 @@ router.post('/bracket/:slotId/result', requireSiteAdmin, (req, res) => {
   const updated = bracket.recomputeSlot(slotId);
   // Reaching R32 affects the qualification tier.
   if (s.round === 'r32') bracket.recomputeQualification();
+  // The final decides the champion and completes the total-goals tally.
+  if (s.round === 'final') bonus.recomputeTournament();
   res.json({ slotId, home, away, predictions_rescored: updated });
+});
+
+// ----- Custom bonus questions (league admin) -----
+
+// POST /api/admin/leagues/:id/questions  { text, options?, points }
+router.post('/leagues/:id/questions', requireLeagueAdmin, (req, res) => {
+  const { text, options, points } = req.body || {};
+  const pts = Number(points);
+  if (!text || !text.trim()) return res.status(400).json({ error: 'Frågetext krävs' });
+  if (!Number.isInteger(pts) || pts < 1 || pts > 100) {
+    return res.status(400).json({ error: 'Poäng måste vara 1–100' });
+  }
+  let opts = null;
+  if (Array.isArray(options)) {
+    const clean = options.map((o) => String(o).trim()).filter(Boolean);
+    if (clean.length) opts = JSON.stringify(clean);
+  }
+  const info = db
+    .prepare('INSERT INTO bonus_questions (league_id, text, options, points, created_by) VALUES (?, ?, ?, ?, ?)')
+    .run(req.league.id, text.trim(), opts, pts, req.user.id);
+  res.json({ id: info.lastInsertRowid });
+});
+
+// POST /api/admin/questions/:qid/resolve  { correctAnswer } — scores all answers
+router.post('/questions/:qid/resolve', (req, res) => {
+  const q = db.prepare('SELECT * FROM bonus_questions WHERE id = ?').get(Number(req.params.qid));
+  if (!q) return res.status(404).json({ error: 'Frågan hittades inte' });
+  const league = db.prepare('SELECT * FROM leagues WHERE id = ?').get(q.league_id);
+  const m = db.prepare('SELECT role FROM league_members WHERE league_id = ? AND user_id = ?').get(q.league_id, req.user.id);
+  const isAdmin = req.user.is_site_admin || league.admin_user_id === req.user.id || (m && m.role === 'admin');
+  if (!isAdmin) return res.status(403).json({ error: 'League admin only' });
+  const correct = (req.body?.correctAnswer || '').toString().trim();
+  if (!correct) return res.status(400).json({ error: 'Rätt svar krävs' });
+  db.prepare('UPDATE bonus_questions SET correct_answer = ? WHERE id = ?').run(correct, q.id);
+  const scored = bonus.recomputeQuestion(q.id);
+  res.json({ id: q.id, answers_scored: scored });
+});
+
+// DELETE /api/admin/questions/:qid
+router.delete('/questions/:qid', (req, res) => {
+  const q = db.prepare('SELECT * FROM bonus_questions WHERE id = ?').get(Number(req.params.qid));
+  if (!q) return res.status(404).json({ error: 'Frågan hittades inte' });
+  const league = db.prepare('SELECT * FROM leagues WHERE id = ?').get(q.league_id);
+  const m = db.prepare('SELECT role FROM league_members WHERE league_id = ? AND user_id = ?').get(q.league_id, req.user.id);
+  const isAdmin = req.user.is_site_admin || league.admin_user_id === req.user.id || (m && m.role === 'admin');
+  if (!isAdmin) return res.status(403).json({ error: 'League admin only' });
+  db.prepare('DELETE FROM bonus_answers WHERE question_id = ?').run(q.id);
+  db.prepare('DELETE FROM bonus_questions WHERE id = ?').run(q.id);
+  res.json({ ok: true });
 });
 
 module.exports = router;

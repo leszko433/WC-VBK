@@ -87,6 +87,7 @@
           <button class="tab active" data-ltab="fixtures">Matcher</button>
           <button class="tab" data-ltab="bracket">Slutspel</button>
           <button class="tab" data-ltab="scorers">Målgörare</button>
+          <button class="tab" data-ltab="bonus">Bonus</button>
           <button class="tab" data-ltab="leaderboard">Topplista</button>
           <button class="tab hidden" data-ltab="admin" id="leagueAdminTab">Liga-admin</button>
         </div>
@@ -136,6 +137,30 @@
         </div>
       </div>
 
+      <div id="ltab-bonus" class="ltab hidden">
+        <div class="card">
+          <h3>⭐ Turneringsbonusar</h3>
+          <p class="muted" id="bonusLockMsg"></p>
+          <div class="bonusgrid">
+            <label>🏆 Världsmästare (30 p)<select id="tpChampion"></select></label>
+            <label>👟 Skyttekung (25 p)<select id="tpScorer"></select></label>
+            <label>🅰️ Assistkung (25 p)<select id="tpAssist"></select></label>
+            <label>🔢 Totalt antal mål (20 p)<input id="tpGoals" type="number" min="0" /></label>
+          </div>
+          <div class="savebar">
+            <button class="btn primary small" id="saveTournamentBtn">Spara bonusar</button>
+            <span id="tournamentMsg" class="formmsg"></span>
+          </div>
+          <div id="tournamentFacit" class="muted"></div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3>❓ Bonusfrågor</h3>
+          <div id="questionList"></div>
+          <p id="noQuestions" class="muted hidden">Inga bonusfrågor ännu. Ligaadmin kan skapa egna frågor.</p>
+        </div>
+      </div>
+
       <div id="ltab-leaderboard" class="ltab hidden">
         <table class="board"><thead><tr><th>#</th><th>Spelare</th><th>Tips</th><th>Poäng</th></tr></thead>
           <tbody id="boardBody"></tbody></table>
@@ -149,6 +174,19 @@
             <button class="btn primary small">Skapa inbjudningskod</button>
           </form>
           <ul id="inviteList" class="invitelist"></ul>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h3>❓ Bonusfrågor (1–100 p)</h3>
+          <form id="questionForm">
+            <label>Fråga<input name="text" placeholder="t.ex. Vilket lag gör flest mål i gruppspelet?" required /></label>
+            <div class="inline">
+              <input name="options" placeholder="Svarsalternativ, kommaseparerat (valfritt)" />
+              <input name="points" type="number" min="1" max="100" placeholder="Poäng" required style="max-width:110px" />
+              <button class="btn primary small">Skapa fråga</button>
+            </div>
+          </form>
+          <p class="formmsg" id="questionFormMsg"></p>
+          <div id="adminQuestionList"></div>
         </div>
       </div>
     </section>
