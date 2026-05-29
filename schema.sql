@@ -126,3 +126,29 @@ CREATE TABLE IF NOT EXISTS qualifier_picks (
 CREATE INDEX IF NOT EXISTS idx_bpred_league ON bracket_predictions(league_id);
 CREATE INDEX IF NOT EXISTS idx_bpred_slot   ON bracket_predictions(slot_id);
 CREATE INDEX IF NOT EXISTS idx_qual_league  ON qualifier_picks(league_id);
+
+-- ===== Personliga målgörare (3 players per user) =====
+-- Player pool with running goals/assists (from api-football top scorers/assists).
+CREATE TABLE IF NOT EXISTS players (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  api_player_id INTEGER UNIQUE,
+  name          TEXT NOT NULL,
+  team_id       INTEGER REFERENCES teams(id),
+  team_name     TEXT,
+  goals         INTEGER NOT NULL DEFAULT 0,
+  assists       INTEGER NOT NULL DEFAULT 0
+);
+
+-- A user picks up to 3 players (slots 1-3) per league. Points = goals*3 + assists*1.
+CREATE TABLE IF NOT EXISTS scorer_picks (
+  id        INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id   INTEGER NOT NULL REFERENCES users(id),
+  league_id INTEGER NOT NULL REFERENCES leagues(id),
+  player_id INTEGER NOT NULL REFERENCES players(id),
+  slot      INTEGER NOT NULL,  -- 1..3
+  points    INTEGER NOT NULL DEFAULT 0,
+  UNIQUE (user_id, league_id, slot),
+  UNIQUE (user_id, league_id, player_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_scorer_league ON scorer_picks(league_id);

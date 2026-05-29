@@ -116,6 +116,26 @@ const standings = {
   ],
 };
 
+// ---- Players (top scorers / assisters) ----
+// One star player per top-2 team (24 players). Stronger team => more goals.
+const pool = teams.filter((t) => t.rank <= 2).sort((a, b) => a.strength - b.strength);
+let pid = 500;
+const players = pool.map((t, i) => ({
+  id: pid++,
+  name: `${t.name} Stjärna`,
+  team: { id: t.id, name: t.name },
+  goals: Math.max(0, 8 - Math.floor(i / 3)), // 8..0
+  assists: (i % 4) + (i % 2),                // 0..4 varied
+}));
+const toStatRow = (p) => ({
+  player: { id: p.id, name: p.name },
+  statistics: [{ team: p.team, goals: { total: p.goals, assists: p.assists } }],
+});
+const topscorers = { response: [...players].sort((a, b) => b.goals - a.goals).map(toStatRow) };
+const topassists = { response: [...players].sort((a, b) => b.assists - a.assists).map(toStatRow) };
+
 fs.writeFileSync(path.join(SEED_DIR, 'fixtures.json'), JSON.stringify({ response: fixtures }, null, 2));
 fs.writeFileSync(path.join(SEED_DIR, 'standings.json'), JSON.stringify(standings, null, 2));
-console.log(`Wrote ${teams.length} teams, ${fixtures.length} fixtures (incl. 31 knockout) to seed/.`);
+fs.writeFileSync(path.join(SEED_DIR, 'topscorers.json'), JSON.stringify(topscorers, null, 2));
+fs.writeFileSync(path.join(SEED_DIR, 'topassists.json'), JSON.stringify(topassists, null, 2));
+console.log(`Wrote ${teams.length} teams, ${fixtures.length} fixtures (incl. 31 knockout), ${players.length} players to seed/.`);

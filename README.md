@@ -19,8 +19,12 @@ poäng. Byggd med **Node.js + Express + SQLite** och en vanilla HTML/CSS/JS-fron
    det laget når nästa runda: nå åttondel **6**, kvart **9**, semi **12**, final **15**.
 3. *Kvalificering:* **3 p/lag** för varje lag du tippar når slutspelet (16-delsfinal).
 
-Maxpoäng slutspelsträd = 32×3 + 16×6 + 8×9 + 4×12 + 2×15 = **342**. Hela regelverket finns på
-`/rules.html`. Världsmästare (30 p), målgörare m.m. rullas ut enligt roadmappen nedan.
+Maxpoäng slutspelsträd = 32×3 + 16×6 + 8×9 + 4×12 + 2×15 = **342**.
+
+**Personliga målgörare:** välj upp till 3 spelare som ger **3 p per mål** och **1 p per assist**
+(från api-footballs topplistor), låses när turneringen börjar.
+
+Hela regelverket finns på `/rules.html`. Världsmästare (30 p) m.m. rullas ut enligt roadmappen.
 
 ## Kom igång (lokalt)
 ```bash
@@ -51,8 +55,9 @@ och resultat. **Committa aldrig den riktiga nyckeln** – `.env` är gitignorera
 - `server.js`, `db.js`, `schema.sql` – server, databas, schema
 - `lib/scoring.js` – ren matchpoänglogik (enhetstestad i `test/`)
 - `lib/bracket.js` – slutspelsträdets två poängspår + kvalificering (enhetstestad)
+- `lib/scorers.js` – personliga målgörare: import + poäng (mål 3 p, assist 1 p)
 - `lib/apiFootball.js` – api-football-klient (mock/live), `lib/importData.js`, `lib/recompute.js`
-- `routes/` – `auth`, `leagues`, `predictions`, `bracket`, `admin`
+- `routes/` – `auth`, `leagues`, `predictions`, `bracket`, `scorers`, `admin`
 - `public/` – frontend (`index.html`, `app.js`, `styles.css`, `rules.html`)
 - `seed/` – exempeldata i api-footballs format
 - `scripts/` – `createAdmin.js`, `sync.js`, `genSeed.js`
@@ -62,8 +67,8 @@ Tester: `npm test`.
 ## Roadmap (samma grund)
 - [x] Matchtippning + poäng + topplista
 - [x] Slutspelsträd med fast slutspelsnyckel (resultat- + lag-spår) och kvalificering
+- [x] 3 personliga målgörare (mål 3 p + assist 1 p), från api-footballs topplistor
 - [ ] Två tippningsfönster (för-VM + efter gruppspel) som separata, låsbara faser
-- [ ] 3 personliga målgörare (mål + assist)
 - [ ] Turneringsbonusar (världsmästare, skyttekung, assistkung, totalt antal mål)
 - [ ] Egna bonusfrågor (ligaadmin, 1–100 p)
 

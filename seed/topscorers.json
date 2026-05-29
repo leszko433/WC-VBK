@@ -1,7 +1,436 @@
 {
   "response": [
-    { "player": { "id": 501, "name": "L. Messi" },   "statistics": [ { "goals": { "total": 4, "assists": 2 } } ] },
-    { "player": { "id": 502, "name": "K. Mbappé" },  "statistics": [ { "goals": { "total": 3, "assists": 1 } } ] },
-    { "player": { "id": 503, "name": "R. Lewandowski" }, "statistics": [ { "goals": { "total": 2, "assists": 0 } } ] }
+    {
+      "player": {
+        "id": 500,
+        "name": "Brasilien Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 100,
+            "name": "Brasilien"
+          },
+          "goals": {
+            "total": 8,
+            "assists": 0
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 501,
+        "name": "Frankrike Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 104,
+            "name": "Frankrike"
+          },
+          "goals": {
+            "total": 8,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 502,
+        "name": "Argentina Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 108,
+            "name": "Argentina"
+          },
+          "goals": {
+            "total": 8,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 503,
+        "name": "Tyskland Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 112,
+            "name": "Tyskland"
+          },
+          "goals": {
+            "total": 7,
+            "assists": 4
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 504,
+        "name": "Spanien Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 116,
+            "name": "Spanien"
+          },
+          "goals": {
+            "total": 7,
+            "assists": 0
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 505,
+        "name": "Portugal Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 120,
+            "name": "Portugal"
+          },
+          "goals": {
+            "total": 7,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 506,
+        "name": "Nederländerna Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 124,
+            "name": "Nederländerna"
+          },
+          "goals": {
+            "total": 6,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 507,
+        "name": "Belgien Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 128,
+            "name": "Belgien"
+          },
+          "goals": {
+            "total": 6,
+            "assists": 4
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 508,
+        "name": "Italien Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 132,
+            "name": "Italien"
+          },
+          "goals": {
+            "total": 6,
+            "assists": 0
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 509,
+        "name": "England Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 136,
+            "name": "England"
+          },
+          "goals": {
+            "total": 5,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 510,
+        "name": "USA Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 140,
+            "name": "USA"
+          },
+          "goals": {
+            "total": 5,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 511,
+        "name": "Danmark Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 144,
+            "name": "Danmark"
+          },
+          "goals": {
+            "total": 5,
+            "assists": 4
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 512,
+        "name": "Marocko Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 101,
+            "name": "Marocko"
+          },
+          "goals": {
+            "total": 4,
+            "assists": 0
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 513,
+        "name": "Senegal Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 105,
+            "name": "Senegal"
+          },
+          "goals": {
+            "total": 4,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 514,
+        "name": "Japan Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 109,
+            "name": "Japan"
+          },
+          "goals": {
+            "total": 4,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 515,
+        "name": "Sydkorea Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 113,
+            "name": "Sydkorea"
+          },
+          "goals": {
+            "total": 3,
+            "assists": 4
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 516,
+        "name": "Schweiz Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 117,
+            "name": "Schweiz"
+          },
+          "goals": {
+            "total": 3,
+            "assists": 0
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 517,
+        "name": "Uruguay Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 121,
+            "name": "Uruguay"
+          },
+          "goals": {
+            "total": 3,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 518,
+        "name": "Mexiko Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 125,
+            "name": "Mexiko"
+          },
+          "goals": {
+            "total": 2,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 519,
+        "name": "Kroatien Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 129,
+            "name": "Kroatien"
+          },
+          "goals": {
+            "total": 2,
+            "assists": 4
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 520,
+        "name": "Colombia Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 133,
+            "name": "Colombia"
+          },
+          "goals": {
+            "total": 2,
+            "assists": 0
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 521,
+        "name": "Ecuador Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 137,
+            "name": "Ecuador"
+          },
+          "goals": {
+            "total": 1,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 522,
+        "name": "Australien Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 141,
+            "name": "Australien"
+          },
+          "goals": {
+            "total": 1,
+            "assists": 2
+          }
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 523,
+        "name": "Peru Stjärna"
+      },
+      "statistics": [
+        {
+          "team": {
+            "id": 145,
+            "name": "Peru"
+          },
+          "goals": {
+            "total": 1,
+            "assists": 4
+          }
+        }
+      ]
+    }
   ]
 }

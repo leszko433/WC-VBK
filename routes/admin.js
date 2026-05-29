@@ -6,6 +6,7 @@ const { requireAuth, requireSiteAdmin, requireLeagueAdmin } = require('../lib/au
 const { syncAll } = require('../lib/importData');
 const { recomputeMatch, recomputeAll, lockStartedMatches } = require('../lib/recompute');
 const bracket = require('../lib/bracket');
+const scorers = require('../lib/scorers');
 
 const router = express.Router();
 router.use(requireAuth);
@@ -45,8 +46,9 @@ router.post('/sync', requireSiteAdmin, async (req, res) => {
     const rescored = recomputeAll();
     const bracketRescored = bracket.recomputeAllBracket();
     bracket.recomputeQualification();
+    const scorersRescored = scorers.recomputeScorers();
     const locked = lockStartedMatches() + bracket.lockStartedBracket();
-    res.json({ ...counts, rescored, bracketRescored, locked });
+    res.json({ ...counts, rescored, bracketRescored, scorersRescored, locked });
   } catch (err) {
     res.status(500).json({ error: String(err.message || err) });
   }

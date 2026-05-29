@@ -143,6 +143,7 @@ function switchLeagueTab(tab) {
   $$('.ltab').forEach((x) => x.classList.add('hidden'));
   $('#ltab-' + tab).classList.remove('hidden');
   if (tab === 'bracket') loadBracket();
+  if (tab === 'scorers') loadScorers();
   if (tab === 'leaderboard') loadLeaderboard();
   if (tab === 'admin') loadInvites();
 }
@@ -348,6 +349,83 @@ $('#saveBracketBtn').addEventListener('click', async () => {
     msg($('#bracketMsg'), `Sparade ${r.saved.length} slutspelstips${r.skipped.length ? ', ' + r.skipped.length + ' hoppade över' : ''}`, true);
     loadBracket();
   } catch (err) { msg($('#bracketMsg'), err.message); }
+});
+
+/* ---------- Personal goal scorers ---------- */
+let scorerData = null;
+let myScorers = []; // ordered list of player ids (max 3)
+
+async function loadScorers() {
+  scorerData = await api.get(`/api/leagues/${state.leagueId}/scorers`);
+  myScorers = scorerData.myPicks.map((p) => p.player_id);
+  $('#saveScorersBtn').disabled = scorerData.locked;
+  $('#scorerSearch').disabled = scorerData.locked;
+  renderScorers();
+}
+
+function playerById(id) { return scorerData.players.find((p) => p.id === id); }
+
+function renderScorers() {
+  // Selected chips
+  const chips = $('#myScorers');
+  chips.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const id = myScorers[i];
+    if (id == null) {
+      const e = document.createElement('div');
+      e.className = 'scorerslot-empty';
+      e.textContent = `Plats ${i + 1} — tom`;
+      chips.appendChild(e);
+    } else {
+      const p = playerById(id);
+      const pts = scorerData.myPicks.find((x) => x.player_id === id)?.points;
+      const e = document.createElement('div');
+      e.className = 'scorerchip';
+      e.innerHTML = `<span>${esc(p.name)} <span class="pstat">${esc(p.team_name || '')}${pts != null ? ` · ${pts}p` : ''}</span></span>`;
+      if (!scorerData.locked) {
+        const rm = document.createElement('span');
+        rm.className = 'rm'; rm.textContent = '✕';
+        rm.addEventListener('click', () => { myScorers = myScorers.filter((x) => x !== id); renderScorers(); });
+        e.appendChild(rm);
+      }
+      chips.appendChild(e);
+    }
+  }
+  $('#scorerCount').textContent = `${myScorers.length} / 3 valda`;
+  renderPlayerPool();
+}
+
+function renderPlayerPool() {
+  const q = ($('#scorerSearch').value || '').toLowerCase();
+  const wrap = $('#playerPool');
+  wrap.innerHTML = '';
+  scorerData.players
+    .filter((p) => !q || p.name.toLowerCase().includes(q) || (p.team_name || '').toLowerCase().includes(q))
+    .forEach((p) => {
+      const picked = myScorers.includes(p.id);
+      const full = myScorers.length >= 3 && !picked;
+      const row = document.createElement('div');
+      row.className = 'prow' + (picked ? ' picked' : '') + (full || scorerData.locked ? ' disabled' : '');
+      row.innerHTML = `<span>${picked ? '✓ ' : ''}${esc(p.name)} <span class="pstat">${esc(p.team_name || '')}</span></span>
+        <span class="pstat"><b>${p.goals}</b> mål · ${p.assists} assist</span>`;
+      if (!scorerData.locked) {
+        row.addEventListener('click', () => {
+          if (picked) myScorers = myScorers.filter((x) => x !== p.id);
+          else if (myScorers.length < 3) myScorers.push(p.id);
+          renderScorers();
+        });
+      }
+      wrap.appendChild(row);
+    });
+}
+
+$('#scorerSearch').addEventListener('input', renderPlayerPool);
+$('#saveScorersBtn').addEventListener('click', async () => {
+  try {
+    const r = await api.post(`/api/leagues/${state.leagueId}/scorers`, { playerIds: myScorers });
+    msg($('#scorerMsg'), `Sparade ${r.saved} målgörare`, true);
+    loadScorers();
+  } catch (err) { msg($('#scorerMsg'), err.message); }
 });
 
 /* ---------- League admin (invites) ---------- */

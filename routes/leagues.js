@@ -116,13 +116,14 @@ router.get('/:id/leaderboard', (req, res) => {
          (SELECT COUNT(*)            FROM predictions p WHERE p.user_id = u.id AND p.league_id = lm.league_id) AS predictions,
          (SELECT COALESCE(SUM(p.points),0) FROM predictions p WHERE p.user_id = u.id AND p.league_id = lm.league_id) AS match_points,
          (SELECT COALESCE(SUM(b.points_result + b.points_advance),0) FROM bracket_predictions b WHERE b.user_id = u.id AND b.league_id = lm.league_id) AS bracket_points,
-         (SELECT COALESCE(SUM(q.points),0) FROM qualifier_picks q WHERE q.user_id = u.id AND q.league_id = lm.league_id) AS qual_points
+         (SELECT COALESCE(SUM(q.points),0) FROM qualifier_picks q WHERE q.user_id = u.id AND q.league_id = lm.league_id) AS qual_points,
+         (SELECT COALESCE(SUM(sc.points),0) FROM scorer_picks sc WHERE sc.user_id = u.id AND sc.league_id = lm.league_id) AS scorer_points
        FROM league_members lm
        JOIN users u ON u.id = lm.user_id
        WHERE lm.league_id = ?`
     )
     .all(leagueId)
-    .map((r) => ({ ...r, points: r.match_points + r.bracket_points + r.qual_points }))
+    .map((r) => ({ ...r, points: r.match_points + r.bracket_points + r.qual_points + r.scorer_points }))
     .sort((a, b) => b.points - a.points || a.display_name.localeCompare(b.display_name));
   res.json(rows);
 });

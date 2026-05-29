@@ -152,6 +152,22 @@ input:focus { outline: none; border-color: var(--green); }
 .bslot .res b { color: var(--green); }
 .bslot.locked { opacity: .8; }
 
+/* Scorers */
+.myscorers { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.scorerchip { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px;
+  background: var(--green-soft); border: 1px solid var(--green-dark); font-size: 14px; }
+.scorerchip .rm { cursor: pointer; color: var(--muted); font-weight: 700; }
+.scorerchip .rm:hover { color: #f87171; }
+.scorerslot-empty { padding: 8px 12px; border: 1px dashed var(--border); border-radius: 10px; color: var(--muted); font-size: 14px; }
+.playerpool { max-height: 360px; overflow-y: auto; margin-top: 12px; }
+.prow { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: 9px; margin-bottom: 7px; background: var(--card2); cursor: pointer; }
+.prow:hover { border-color: var(--green); }
+.prow.picked { background: var(--green-soft); border-color: var(--green-dark); }
+.prow.disabled { opacity: .5; cursor: not-allowed; }
+.prow .pstat { color: var(--muted); font-size: 13px; }
+.prow .pstat b { color: var(--green); }
+
 /* Leaderboard */
 .board { width: 100%; border-collapse: collapse; }
 .board th, .board td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); }
