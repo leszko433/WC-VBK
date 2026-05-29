@@ -2,6 +2,56 @@
 För AI-gruppen på VBK.
 Säg till Emil om det är några frågor kring upplägg, hur branches fungerar, om man vill ha hjälp med en pull request osv.
 
+---
+
+# VM-tips 2026 ⚽
+
+Webbapp där inbjudna användare skapar konto och tippar fotbolls-VM 2026. Exakt resultat ger mest
+poäng. Byggd med **Node.js + Express + SQLite** och en vanilla HTML/CSS/JS-frontend.
+
+## Poängsystem (MVP)
+Per match: rätt utfall (1X2) **+3**, exakt hemmamål **+2**, exakt bortamål **+2** (allt rätt = **7**,
+"Perfekt tips"). Hela regelverket (slutspelsträd, turneringsbonusar, 3 målgörare, bonusfrågor)
+finns på sidan `/rules.html` och rullas ut enligt roadmappen nedan.
+
+## Kom igång (lokalt)
+```bash
+npm install
+cp .env.example .env        # USE_MOCK_DATA=true funkar direkt med exempeldata
+npm run seed-admin          # skapar site-admin från ADMIN_* i .env
+node scripts/sync.js        # laddar lag + matcher (mockdata)
+npm start                   # http://localhost:3000
+```
+Logga in som admin → skapa en liga → skapa en inbjudningskod → registrera spelare med koden →
+tippa matcher → admin registrerar resultat → poäng och topplista uppdateras automatiskt.
+
+## Live-data (vid driftsättning)
+API-anrop sker **bara server-side** (nyckeln exponeras aldrig i webbläsaren). Sätt i `.env`:
+```
+USE_MOCK_DATA=false
+API_FOOTBALL_KEY=<din nyckel från api-football.com>
+```
+Kör på en server där `v3.football.api-sports.io` är tillåten i nätverket. Kör sedan
+`node scripts/sync.js` (eller "Hämta matcher" i admin-vyn) för att hämta riktiga grupper, matcher
+och resultat. **Committa aldrig den riktiga nyckeln** – `.env` är gitignorerad.
+
+## Struktur
+- `server.js`, `db.js`, `schema.sql` – server, databas, schema
+- `lib/scoring.js` – ren poänglogik (enhetstestad i `test/`)
+- `lib/apiFootball.js` – api-football-klient (mock/live), `lib/importData.js`, `lib/recompute.js`
+- `routes/` – `auth`, `leagues`, `predictions`, `admin`
+- `public/` – frontend (`index.html`, `app.js`, `styles.css`, `rules.html`)
+- `seed/` – exempeldata i api-footballs format
+- `scripts/` – `createAdmin.js`, `sync.js`
+
+Tester: `npm test`.
+
+## Roadmap (efter MVP, samma grund)
+Slutspelsträd med fast slutspelsnyckel (två poängspår) · två tippningsfönster (för-VM + efter
+gruppspel) · 3 personliga målgörare (mål + assist) · turneringsbonusar · egna bonusfrågor.
+
+---
+
 # Regler
 1. Arbeta aldrig direkt i main/master.
 2. Skapa alltid en egen branch för varje ändring eller feature.

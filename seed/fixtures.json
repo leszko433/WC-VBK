@@ -1,0 +1,77 @@
+{
+  "response": [
+    {
+      "fixture": { "id": 1001, "date": "2026-06-11T16:00:00+00:00", "status": { "short": "FT" } },
+      "league": { "round": "Group Stage - 1" },
+      "teams": { "home": { "id": 26, "name": "Argentina" }, "away": { "id": 23, "name": "Saudi Arabia" } },
+      "goals": { "home": 1, "away": 2 }
+    },
+    {
+      "fixture": { "id": 1002, "date": "2026-06-11T19:00:00+00:00", "status": { "short": "FT" } },
+      "league": { "round": "Group Stage - 1" },
+      "teams": { "home": { "id": 16, "name": "Mexico" }, "away": { "id": 24, "name": "Poland" } },
+      "goals": { "home": 0, "away": 0 }
+    },
+    {
+      "fixture": { "id": 1003, "date": "2026-06-15T16:00:00+00:00", "status": { "short": "FT" } },
+      "league": { "round": "Group Stage - 2" },
+      "teams": { "home": { "id": 24, "name": "Poland" }, "away": { "id": 23, "name": "Saudi Arabia" } },
+      "goals": { "home": 2, "away": 0 }
+    },
+    {
+      "fixture": { "id": 1004, "date": "2026-06-15T19:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 2" },
+      "teams": { "home": { "id": 26, "name": "Argentina" }, "away": { "id": 16, "name": "Mexico" } },
+      "goals": { "home": null, "away": null }
+    },
+    {
+      "fixture": { "id": 1005, "date": "2026-06-19T16:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 3" },
+      "teams": { "home": { "id": 24, "name": "Poland" }, "away": { "id": 26, "name": "Argentina" } },
+      "goals": { "home": null, "away": null }
+    },
+    {
+      "fixture": { "id": 1006, "date": "2026-06-19T16:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 3" },
+      "teams": { "home": { "id": 23, "name": "Saudi Arabia" }, "away": { "id": 16, "name": "Mexico" } },
+      "goals": { "home": null, "away": null }
+    },
+
+    {
+      "fixture": { "id": 2001, "date": "2026-06-12T16:00:00+00:00", "status": { "short": "FT" } },
+      "league": { "round": "Group Stage - 1" },
+      "teams": { "home": { "id": 21, "name": "Denmark" }, "away": { "id": 28, "name": "Tunisia" } },
+      "goals": { "home": 0, "away": 0 }
+    },
+    {
+      "fixture": { "id": 2002, "date": "2026-06-12T19:00:00+00:00", "status": { "short": "FT" } },
+      "league": { "round": "Group Stage - 1" },
+      "teams": { "home": { "id": 2, "name": "France" }, "away": { "id": 20, "name": "Australia" } },
+      "goals": { "home": 4, "away": 1 }
+    },
+    {
+      "fixture": { "id": 2003, "date": "2026-06-16T16:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 2" },
+      "teams": { "home": { "id": 28, "name": "Tunisia" }, "away": { "id": 20, "name": "Australia" } },
+      "goals": { "home": null, "away": null }
+    },
+    {
+      "fixture": { "id": 2004, "date": "2026-06-16T19:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 2" },
+      "teams": { "home": { "id": 2, "name": "France" }, "away": { "id": 21, "name": "Denmark" } },
+      "goals": { "home": null, "away": null }
+    },
+    {
+      "fixture": { "id": 2005, "date": "2026-06-20T16:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 3" },
+      "teams": { "home": { "id": 20, "name": "Australia" }, "away": { "id": 21, "name": "Denmark" } },
+      "goals": { "home": null, "away": null }
+    },
+    {
+      "fixture": { "id": 2006, "date": "2026-06-20T16:00:00+00:00", "status": { "short": "NS" } },
+      "league": { "round": "Group Stage - 3" },
+      "teams": { "home": { "id": 28, "name": "Tunisia" }, "away": { "id": 2, "name": "France" } },
+      "goals": { "home": null, "away": null }
+    }
+  ]
+}

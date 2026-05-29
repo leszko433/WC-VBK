@@ -1,0 +1,6 @@
+{
+  "response": [
+    { "player": { "id": 502, "name": "K. Mbappé" }, "statistics": [ { "goals": { "total": 3, "assists": 3 } } ] },
+    { "player": { "id": 501, "name": "L. Messi" },  "statistics": [ { "goals": { "total": 4, "assists": 2 } } ] }
+  ]
+}

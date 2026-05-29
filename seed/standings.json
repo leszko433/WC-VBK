@@ -1,0 +1,24 @@
+{
+  "response": [
+    {
+      "league": {
+        "id": 1,
+        "season": 2026,
+        "standings": [
+          [
+            { "rank": 1, "team": { "id": 26,  "name": "Argentina",    "logo": "" }, "group": "Group A", "flag": "🇦🇷" },
+            { "rank": 2, "team": { "id": 16,  "name": "Mexico",       "logo": "" }, "group": "Group A", "flag": "🇲🇽" },
+            { "rank": 3, "team": { "id": 24,  "name": "Poland",       "logo": "" }, "group": "Group A", "flag": "🇵🇱" },
+            { "rank": 4, "team": { "id": 23,  "name": "Saudi Arabia", "logo": "" }, "group": "Group A", "flag": "🇸🇦" }
+          ],
+          [
+            { "rank": 1, "team": { "id": 2,   "name": "France",       "logo": "" }, "group": "Group B", "flag": "🇫🇷" },
+            { "rank": 2, "team": { "id": 21,  "name": "Denmark",      "logo": "" }, "group": "Group B", "flag": "🇩🇰" },
+            { "rank": 3, "team": { "id": 28,  "name": "Tunisia",      "logo": "" }, "group": "Group B", "flag": "🇹🇳" },
+            { "rank": 4, "team": { "id": 20,  "name": "Australia",    "logo": "" }, "group": "Group B", "flag": "🇦🇺" }
+          ]
+        ]
+      }
+    }
+  ]
+}
