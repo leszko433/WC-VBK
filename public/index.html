@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VM-tips 2026</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">⚽ <span>VM-tips <b>2026</b></span></div>
+    <nav id="nav" class="nav hidden">
+      <a href="#" data-view="dashboard">Mina ligor</a>
+      <a href="rules.html">Poängsystem</a>
+      <a href="#" data-view="admin" id="navAdmin" class="hidden">Admin</a>
+      <span class="spacer"></span>
+      <span id="whoami" class="whoami"></span>
+      <button id="logoutBtn" class="btn ghost small">Logga ut</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <!-- AUTH -->
+    <section id="view-auth" class="view">
+      <div class="auth-wrap">
+        <div class="card auth-card">
+          <div class="tabs">
+            <button class="tab active" data-tab="login">Logga in</button>
+            <button class="tab" data-tab="register">Skapa konto</button>
+          </div>
+
+          <form id="loginForm" class="authform">
+            <h2>Välkommen tillbaka</h2>
+            <label>E-post<input type="email" name="email" required /></label>
+            <label>Lösenord<input type="password" name="password" required /></label>
+            <button class="btn primary" type="submit">Logga in</button>
+            <p class="formmsg" id="loginMsg"></p>
+          </form>
+
+          <form id="registerForm" class="authform hidden">
+            <h2>Skapa konto</h2>
+            <p class="muted">Registrering kräver en inbjudningskod från din ligaadmin.</p>
+            <label>Inbjudningskod<input name="code" required placeholder="t.ex. AB12CD34" /></label>
+            <label>Namn<input name="displayName" required /></label>
+            <label>E-post<input type="email" name="email" required /></label>
+            <label>Lösenord (min 6 tecken)<input type="password" name="password" required /></label>
+            <button class="btn primary" type="submit">Skapa konto</button>
+            <p class="formmsg" id="registerMsg"></p>
+          </form>
+        </div>
+        <p class="tagline">Tippa VM 2026 med jobbet · exakt resultat ger mest poäng</p>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="view hidden">
+      <div class="grid two">
+        <div class="card">
+          <h3>Mina ligor</h3>
+          <ul id="leagueList" class="leaguelist"></ul>
+          <p id="noLeagues" class="muted hidden">Du är inte med i någon liga ännu.</p>
+        </div>
+        <div class="card">
+          <h3>Skapa eller gå med</h3>
+          <form id="createLeagueForm" class="inline">
+            <input name="name" placeholder="Liganamn" required />
+            <button class="btn primary small">Skapa liga</button>
+          </form>
+          <p class="formmsg" id="createLeagueMsg"></p>
+          <hr />
+          <form id="joinLeagueForm" class="inline">
+            <input name="code" placeholder="Gå med via kod" required />
+            <button class="btn small">Gå med</button>
+          </form>
+          <p class="formmsg" id="joinLeagueMsg"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEAGUE -->
+    <section id="view-league" class="view hidden">
+      <div class="leaguehead">
+        <button class="btn ghost small" id="backBtn">← Tillbaka</button>
+        <h2 id="leagueName"></h2>
+        <div class="leaguetabs">
+          <button class="tab active" data-ltab="fixtures">Matcher</button>
+          <button class="tab" data-ltab="bracket">Slutspel</button>
+          <button class="tab" data-ltab="scorers">Målgörare</button>
+          <button class="tab" data-ltab="bonus">Bonus</button>
+          <button class="tab" data-ltab="leaderboard">Topplista</button>
+          <button class="tab hidden" data-ltab="admin" id="leagueAdminTab">Liga-admin</button>
+        </div>
+      </div>
+
+      <div id="ltab-fixtures" class="ltab">
+        <p class="muted">Tippa exakt resultat. Rätt utfall +3, exakt hemma +2, exakt borta +2 (allt rätt = 7).</p>
+        <div id="fixtures"></div>
+        <div class="savebar">
+          <button class="btn primary" id="savePredsBtn">Spara mina tips</button>
+          <span id="saveMsg" class="formmsg"></span>
+        </div>
+      </div>
+
+      <div id="ltab-bracket" class="ltab hidden">
+        <div class="card" id="qualCard">
+          <h3>👥 Kvalificering — vilka 32 lag når slutspelet?</h3>
+          <p class="muted">3 poäng per lag som du prickar rätt (max 96 p). Låses när slutspelet börjar.</p>
+          <div id="qualGroups" class="qualgroups"></div>
+          <div class="savebar">
+            <span id="qualCount" class="muted"></span>
+            <button class="btn primary small" id="saveQualBtn">Spara kval-tips</button>
+            <span id="qualMsg" class="formmsg"></span>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:18px">Tippa varje slutspelsmatch: <b>resultat</b> (3/2/2, allt rätt = 7) och vilket <b>lag som går vidare</b> (bonus 6/9/12/15 p).</p>
+        <div id="bracket" class="bracket"></div>
+        <div class="savebar">
+          <button class="btn primary" id="saveBracketBtn">Spara slutspelstips</button>
+          <span id="bracketMsg" class="formmsg"></span>
+        </div>
+      </div>
+
+      <div id="ltab-scorers" class="ltab hidden">
+        <div class="card">
+          <h3>👟 Dina 3 målgörare</h3>
+          <p class="muted">Välj upp till 3 spelare. Mål ger <b>3 p</b>, assist ger <b>1 p</b>. Låses när turneringen börjar.</p>
+          <div id="myScorers" class="myscorers"></div>
+          <div class="savebar">
+            <span id="scorerCount" class="muted"></span>
+            <button class="btn primary small" id="saveScorersBtn">Spara målgörare</button>
+            <span id="scorerMsg" class="formmsg"></span>
+          </div>
+          <hr />
+          <input id="scorerSearch" placeholder="Sök spelare eller lag…" />
+          <div id="playerPool" class="playerpool"></div>
+        </div>
+      </div>
+
+      <div id="ltab-bonus" class="ltab hidden">
+        <div class="card">
+          <h3>⭐ Turneringsbonusar</h3>
+          <p class="muted" id="bonusLockMsg"></p>
+          <div class="bonusgrid">
+            <label>🏆 Världsmästare (30 p)<select id="tpChampion"></select></label>
+            <label>👟 Skyttekung (25 p)<select id="tpScorer"></select></label>
+            <label>🅰️ Assistkung (25 p)<select id="tpAssist"></select></label>
+            <label>🔢 Totalt antal mål (20 p)<input id="tpGoals" type="number" min="0" /></label>
+          </div>
+          <div class="savebar">
+            <button class="btn primary small" id="saveTournamentBtn">Spara bonusar</button>
+            <span id="tournamentMsg" class="formmsg"></span>
+          </div>
+          <div id="tournamentFacit" class="muted"></div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3>❓ Bonusfrågor</h3>
+          <div id="questionList"></div>
+          <p id="noQuestions" class="muted hidden">Inga bonusfrågor ännu. Ligaadmin kan skapa egna frågor.</p>
+        </div>
+      </div>
+
+      <div id="ltab-leaderboard" class="ltab hidden">
+        <table class="board"><thead><tr><th>#</th><th>Spelare</th><th>Tips</th><th>Poäng</th></tr></thead>
+          <tbody id="boardBody"></tbody></table>
+      </div>
+
+      <div id="ltab-admin" class="ltab hidden">
+        <div class="card">
+          <h3>Inbjudningar</h3>
+          <form id="inviteForm" class="inline">
+            <input name="email" type="email" placeholder="E-post (valfritt)" />
+            <button class="btn primary small">Skapa inbjudningskod</button>
+          </form>
+          <ul id="inviteList" class="invitelist"></ul>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h3>❓ Bonusfrågor (1–100 p)</h3>
+          <form id="questionForm">
+            <label>Fråga<input name="text" placeholder="t.ex. Vilket lag gör flest mål i gruppspelet?" required /></label>
+            <div class="inline">
+              <input name="options" placeholder="Svarsalternativ, kommaseparerat (valfritt)" />
+              <input name="points" type="number" min="1" max="100" placeholder="Poäng" required style="max-width:110px" />
+              <button class="btn primary small">Skapa fråga</button>
+            </div>
+          </form>
+          <p class="formmsg" id="questionFormMsg"></p>
+          <div id="adminQuestionList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SITE ADMIN -->
+    <section id="view-admin" class="view hidden">
+      <div class="card">
+        <h3>Site-admin</h3>
+        <button class="btn" id="syncBtn">Hämta matcher (sync)</button>
+        <span id="syncMsg" class="formmsg"></span>
+        <p class="muted">Hämtar grupper, lag och matcher (mockdata lokalt, live-API vid driftsättning).</p>
+        <hr />
+        <h3>Registrera gruppspelsresultat</h3>
+        <p class="muted">Sätt slutresultat så räknas alla tips om automatiskt.</p>
+        <div id="adminMatches"></div>
+        <hr />
+        <h3>Registrera slutspelsresultat</h3>
+        <div id="adminBracket"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

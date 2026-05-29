@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poängsystem — VM-tips 2026</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .rule { display:flex; justify-content:space-between; align-items:center; padding:13px 14px;
+      border:1px solid var(--border); border-radius:10px; margin-bottom:9px; background:var(--card2); }
+    .rule .p { color: var(--green); font-weight:700; font-size:18px; }
+    .rule.hi { border-color: var(--green-dark); background: var(--green-soft); }
+    .rule small { color: var(--muted); display:block; margin-top:3px; }
+    .ex { padding:11px 14px; border:1px solid var(--border); border-radius:10px; margin-bottom:9px; background:var(--card2); font-size:14px; }
+    .ex .g { color: var(--green); font-weight:700; }
+    .ex .x { color: var(--muted); }
+    h1 { text-align:center; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">⚽ <span>VM-tips <b>2026</b></span></div>
+    <nav class="nav"><a href="index.html">← Till appen</a></nav>
+  </header>
+  <main>
+    <h1>Poängsystem för VM 2026</h1>
+    <div class="grid two">
+      <div class="card">
+        <h3>🎯 Matchresultat</h3>
+        <p class="muted">Tippa resultatet för varje match</p>
+        <div class="rule"><div>Rätt utfall (1X2)<small>Tippa rätt vinnare eller oavgjort</small></div><span class="p">3 p</span></div>
+        <div class="rule"><div>Rätt hemmaresultat<small>Pricka hemmalagets exakta målantal</small></div><span class="p">2 p</span></div>
+        <div class="rule"><div>Rätt bortaresultat<small>Pricka bortalagets exakta målantal</small></div><span class="p">2 p</span></div>
+        <div class="rule hi"><div>Perfekt tips<small>Allt rätt: utfall + båda resultaten (3 + 2 + 2)</small></div><span class="p">7 p</span></div>
+      </div>
+      <div class="card">
+        <h3>🔀 Slutspelsträd</h3>
+        <p class="muted">Tippa vilka lag som går vidare (bonuspoäng per lag)</p>
+        <div class="rule"><div>16-delsfinal</div><span class="p">3 p/lag</span></div>
+        <div class="rule"><div>Åttondelsfinal</div><span class="p">6 p/lag</span></div>
+        <div class="rule"><div>Kvartsfinal</div><span class="p">9 p/lag</span></div>
+        <div class="rule"><div>Semifinal</div><span class="p">12 p/lag</span></div>
+        <div class="rule hi"><div>Final</div><span class="p">15 p/lag</span></div>
+        <p class="muted">Max 342 poäng för hela slutspelsträdet.</p>
+      </div>
+      <div class="card">
+        <h3>⭐ Turneringsbonusar</h3>
+        <div class="rule"><div>Världsmästare<small>Tippa vilket lag som vinner VM 2026</small></div><span class="p">30 p</span></div>
+        <div class="rule"><div>Skyttekung<small>Tippa vem som gör flest mål i VM</small></div><span class="p">25 p</span></div>
+        <div class="rule"><div>Assistkung<small>Tippa vem som får flest assist</small></div><span class="p">25 p</span></div>
+        <div class="rule"><div>Totalt antal mål<small>Gissa det totala antalet mål i turneringen</small></div><span class="p">20 p</span></div>
+      </div>
+      <div class="card">
+        <h3>👟 Dina 3 målgörare</h3>
+        <p class="muted">Välj 3 spelare som samlar poäng under hela turneringen</p>
+        <div class="rule"><div>Mål av din spelare</div><span class="p">3 p</span></div>
+        <div class="rule"><div>Assist av din spelare</div><span class="p">1 p</span></div>
+        <p class="muted">Uppdateras löpande från officiell statistik.</p>
+        <h3 style="margin-top:18px">❓ Bonusfrågor</h3>
+        <p class="muted">Ligaadmin kan skapa egna frågor (1–100 poäng) och avgöra svaret.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h3>📊 Poängexempel — Tips 2-1</h3>
+      <div class="ex">Resultat 2-1 · <span class="g">✓ Utfall +3 | ✓ Hemma +2 | ✓ Borta +2 = 7 poäng</span></div>
+      <div class="ex">Resultat 3-1 · <span class="g">✓ Utfall +3</span> | <span class="x">✗ Hemma</span> | <span class="g">✓ Borta +2 = 5 poäng</span></div>
+      <div class="ex">Resultat 1-1 · <span class="x">✗ Utfall | ✗ Hemma</span> | <span class="g">✓ Borta +2 = 2 poäng</span></div>
+      <div class="ex">Resultat 0-2 · <span class="x">✗ Utfall | ✗ Hemma | ✗ Borta = 0 poäng</span></div>
+    </div>
+  </main>
+</body>
+</html>

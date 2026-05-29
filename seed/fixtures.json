@@ -1,0 +1,2682 @@
+{
+  "response": [
+    {
+      "fixture": {
+        "id": 10001,
+        "date": "2026-06-11T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 101,
+          "name": "Marocko"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10002,
+        "date": "2026-06-11T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 102,
+          "name": "Serbien"
+        },
+        "away": {
+          "id": 103,
+          "name": "Kanada"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10003,
+        "date": "2026-06-11T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 102,
+          "name": "Serbien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10004,
+        "date": "2026-06-11T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 101,
+          "name": "Marocko"
+        },
+        "away": {
+          "id": 103,
+          "name": "Kanada"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10005,
+        "date": "2026-06-11T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 103,
+          "name": "Kanada"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10006,
+        "date": "2026-06-11T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 101,
+          "name": "Marocko"
+        },
+        "away": {
+          "id": 102,
+          "name": "Serbien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10007,
+        "date": "2026-06-12T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 104,
+          "name": "Frankrike"
+        },
+        "away": {
+          "id": 105,
+          "name": "Senegal"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10008,
+        "date": "2026-06-12T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 106,
+          "name": "Polen"
+        },
+        "away": {
+          "id": 107,
+          "name": "Costa Rica"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10009,
+        "date": "2026-06-12T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 104,
+          "name": "Frankrike"
+        },
+        "away": {
+          "id": 106,
+          "name": "Polen"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10010,
+        "date": "2026-06-12T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 105,
+          "name": "Senegal"
+        },
+        "away": {
+          "id": 107,
+          "name": "Costa Rica"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10011,
+        "date": "2026-06-12T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 104,
+          "name": "Frankrike"
+        },
+        "away": {
+          "id": 107,
+          "name": "Costa Rica"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10012,
+        "date": "2026-06-12T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 105,
+          "name": "Senegal"
+        },
+        "away": {
+          "id": 106,
+          "name": "Polen"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10013,
+        "date": "2026-06-13T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 108,
+          "name": "Argentina"
+        },
+        "away": {
+          "id": 109,
+          "name": "Japan"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10014,
+        "date": "2026-06-13T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 110,
+          "name": "Tunisien"
+        },
+        "away": {
+          "id": 111,
+          "name": "Nya Zeeland"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10015,
+        "date": "2026-06-13T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 108,
+          "name": "Argentina"
+        },
+        "away": {
+          "id": 110,
+          "name": "Tunisien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10016,
+        "date": "2026-06-13T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 109,
+          "name": "Japan"
+        },
+        "away": {
+          "id": 111,
+          "name": "Nya Zeeland"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10017,
+        "date": "2026-06-13T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 108,
+          "name": "Argentina"
+        },
+        "away": {
+          "id": 111,
+          "name": "Nya Zeeland"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10018,
+        "date": "2026-06-13T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 109,
+          "name": "Japan"
+        },
+        "away": {
+          "id": 110,
+          "name": "Tunisien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10019,
+        "date": "2026-06-14T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 112,
+          "name": "Tyskland"
+        },
+        "away": {
+          "id": 113,
+          "name": "Sydkorea"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10020,
+        "date": "2026-06-14T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 114,
+          "name": "Ghana"
+        },
+        "away": {
+          "id": 115,
+          "name": "Panama"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10021,
+        "date": "2026-06-14T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 112,
+          "name": "Tyskland"
+        },
+        "away": {
+          "id": 114,
+          "name": "Ghana"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10022,
+        "date": "2026-06-14T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 113,
+          "name": "Sydkorea"
+        },
+        "away": {
+          "id": 115,
+          "name": "Panama"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10023,
+        "date": "2026-06-14T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 112,
+          "name": "Tyskland"
+        },
+        "away": {
+          "id": 115,
+          "name": "Panama"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10024,
+        "date": "2026-06-14T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 113,
+          "name": "Sydkorea"
+        },
+        "away": {
+          "id": 114,
+          "name": "Ghana"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10025,
+        "date": "2026-06-15T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 116,
+          "name": "Spanien"
+        },
+        "away": {
+          "id": 117,
+          "name": "Schweiz"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10026,
+        "date": "2026-06-15T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 118,
+          "name": "Kamerun"
+        },
+        "away": {
+          "id": 119,
+          "name": "Jordanien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10027,
+        "date": "2026-06-15T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 116,
+          "name": "Spanien"
+        },
+        "away": {
+          "id": 118,
+          "name": "Kamerun"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10028,
+        "date": "2026-06-15T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 117,
+          "name": "Schweiz"
+        },
+        "away": {
+          "id": 119,
+          "name": "Jordanien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10029,
+        "date": "2026-06-15T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 116,
+          "name": "Spanien"
+        },
+        "away": {
+          "id": 119,
+          "name": "Jordanien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10030,
+        "date": "2026-06-15T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 117,
+          "name": "Schweiz"
+        },
+        "away": {
+          "id": 118,
+          "name": "Kamerun"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10031,
+        "date": "2026-06-16T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 121,
+          "name": "Uruguay"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10032,
+        "date": "2026-06-16T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 122,
+          "name": "Egypten"
+        },
+        "away": {
+          "id": 123,
+          "name": "Curaçao"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10033,
+        "date": "2026-06-16T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 122,
+          "name": "Egypten"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10034,
+        "date": "2026-06-16T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 121,
+          "name": "Uruguay"
+        },
+        "away": {
+          "id": 123,
+          "name": "Curaçao"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10035,
+        "date": "2026-06-16T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 123,
+          "name": "Curaçao"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10036,
+        "date": "2026-06-16T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 121,
+          "name": "Uruguay"
+        },
+        "away": {
+          "id": 122,
+          "name": "Egypten"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10037,
+        "date": "2026-06-17T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 124,
+          "name": "Nederländerna"
+        },
+        "away": {
+          "id": 125,
+          "name": "Mexiko"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10038,
+        "date": "2026-06-17T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 126,
+          "name": "Iran"
+        },
+        "away": {
+          "id": 127,
+          "name": "Haiti"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10039,
+        "date": "2026-06-17T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 124,
+          "name": "Nederländerna"
+        },
+        "away": {
+          "id": 126,
+          "name": "Iran"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10040,
+        "date": "2026-06-17T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 125,
+          "name": "Mexiko"
+        },
+        "away": {
+          "id": 127,
+          "name": "Haiti"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10041,
+        "date": "2026-06-17T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 124,
+          "name": "Nederländerna"
+        },
+        "away": {
+          "id": 127,
+          "name": "Haiti"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10042,
+        "date": "2026-06-17T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 125,
+          "name": "Mexiko"
+        },
+        "away": {
+          "id": 126,
+          "name": "Iran"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10043,
+        "date": "2026-06-18T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 128,
+          "name": "Belgien"
+        },
+        "away": {
+          "id": 129,
+          "name": "Kroatien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10044,
+        "date": "2026-06-18T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 130,
+          "name": "Nigeria"
+        },
+        "away": {
+          "id": 131,
+          "name": "Uzbekistan"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10045,
+        "date": "2026-06-18T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 128,
+          "name": "Belgien"
+        },
+        "away": {
+          "id": 130,
+          "name": "Nigeria"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10046,
+        "date": "2026-06-18T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 129,
+          "name": "Kroatien"
+        },
+        "away": {
+          "id": 131,
+          "name": "Uzbekistan"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10047,
+        "date": "2026-06-18T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 128,
+          "name": "Belgien"
+        },
+        "away": {
+          "id": 131,
+          "name": "Uzbekistan"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10048,
+        "date": "2026-06-18T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 129,
+          "name": "Kroatien"
+        },
+        "away": {
+          "id": 130,
+          "name": "Nigeria"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10049,
+        "date": "2026-06-19T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 132,
+          "name": "Italien"
+        },
+        "away": {
+          "id": 133,
+          "name": "Colombia"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10050,
+        "date": "2026-06-19T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 134,
+          "name": "Algeriet"
+        },
+        "away": {
+          "id": 135,
+          "name": "Sydafrika"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10051,
+        "date": "2026-06-19T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 132,
+          "name": "Italien"
+        },
+        "away": {
+          "id": 134,
+          "name": "Algeriet"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10052,
+        "date": "2026-06-19T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 133,
+          "name": "Colombia"
+        },
+        "away": {
+          "id": 135,
+          "name": "Sydafrika"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10053,
+        "date": "2026-06-19T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 132,
+          "name": "Italien"
+        },
+        "away": {
+          "id": 135,
+          "name": "Sydafrika"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10054,
+        "date": "2026-06-19T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 133,
+          "name": "Colombia"
+        },
+        "away": {
+          "id": 134,
+          "name": "Algeriet"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10055,
+        "date": "2026-06-20T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 136,
+          "name": "England"
+        },
+        "away": {
+          "id": 137,
+          "name": "Ecuador"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10056,
+        "date": "2026-06-20T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 138,
+          "name": "Saudiarabien"
+        },
+        "away": {
+          "id": 139,
+          "name": "Jamaica"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10057,
+        "date": "2026-06-20T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 136,
+          "name": "England"
+        },
+        "away": {
+          "id": 138,
+          "name": "Saudiarabien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10058,
+        "date": "2026-06-20T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 137,
+          "name": "Ecuador"
+        },
+        "away": {
+          "id": 139,
+          "name": "Jamaica"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10059,
+        "date": "2026-06-20T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 136,
+          "name": "England"
+        },
+        "away": {
+          "id": 139,
+          "name": "Jamaica"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10060,
+        "date": "2026-06-20T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 137,
+          "name": "Ecuador"
+        },
+        "away": {
+          "id": 138,
+          "name": "Saudiarabien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10061,
+        "date": "2026-06-21T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 140,
+          "name": "USA"
+        },
+        "away": {
+          "id": 141,
+          "name": "Australien"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10062,
+        "date": "2026-06-21T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 142,
+          "name": "Qatar"
+        },
+        "away": {
+          "id": 143,
+          "name": "Kap Verde"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10063,
+        "date": "2026-06-21T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 140,
+          "name": "USA"
+        },
+        "away": {
+          "id": 142,
+          "name": "Qatar"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10064,
+        "date": "2026-06-21T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 141,
+          "name": "Australien"
+        },
+        "away": {
+          "id": 143,
+          "name": "Kap Verde"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10065,
+        "date": "2026-06-21T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 140,
+          "name": "USA"
+        },
+        "away": {
+          "id": 143,
+          "name": "Kap Verde"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10066,
+        "date": "2026-06-21T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 141,
+          "name": "Australien"
+        },
+        "away": {
+          "id": 142,
+          "name": "Qatar"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10067,
+        "date": "2026-06-22T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 144,
+          "name": "Danmark"
+        },
+        "away": {
+          "id": 145,
+          "name": "Peru"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10068,
+        "date": "2026-06-22T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 146,
+          "name": "Elfenbenskusten"
+        },
+        "away": {
+          "id": 147,
+          "name": "Norge"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10069,
+        "date": "2026-06-22T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 144,
+          "name": "Danmark"
+        },
+        "away": {
+          "id": 146,
+          "name": "Elfenbenskusten"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10070,
+        "date": "2026-06-22T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 145,
+          "name": "Peru"
+        },
+        "away": {
+          "id": 147,
+          "name": "Norge"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 10071,
+        "date": "2026-06-22T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 144,
+          "name": "Danmark"
+        },
+        "away": {
+          "id": 147,
+          "name": "Norge"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "fixture": {
+        "id": 10072,
+        "date": "2026-06-22T16:00:00+00:00",
+        "status": {
+          "short": "FT"
+        }
+      },
+      "league": {
+        "round": "Group Stage - 3"
+      },
+      "teams": {
+        "home": {
+          "id": 145,
+          "name": "Peru"
+        },
+        "away": {
+          "id": 146,
+          "name": "Elfenbenskusten"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
+      "fixture": {
+        "id": 32001,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 105,
+          "name": "Senegal"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32002,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 108,
+          "name": "Argentina"
+        },
+        "away": {
+          "id": 113,
+          "name": "Sydkorea"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32003,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 116,
+          "name": "Spanien"
+        },
+        "away": {
+          "id": 121,
+          "name": "Uruguay"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32004,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 124,
+          "name": "Nederländerna"
+        },
+        "away": {
+          "id": 129,
+          "name": "Kroatien"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32005,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 132,
+          "name": "Italien"
+        },
+        "away": {
+          "id": 137,
+          "name": "Ecuador"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32006,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 140,
+          "name": "USA"
+        },
+        "away": {
+          "id": 145,
+          "name": "Peru"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32007,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 104,
+          "name": "Frankrike"
+        },
+        "away": {
+          "id": 101,
+          "name": "Marocko"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32008,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 112,
+          "name": "Tyskland"
+        },
+        "away": {
+          "id": 109,
+          "name": "Japan"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32009,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 117,
+          "name": "Schweiz"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32010,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 128,
+          "name": "Belgien"
+        },
+        "away": {
+          "id": 125,
+          "name": "Mexiko"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32011,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 136,
+          "name": "England"
+        },
+        "away": {
+          "id": 133,
+          "name": "Colombia"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32012,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 144,
+          "name": "Danmark"
+        },
+        "away": {
+          "id": 141,
+          "name": "Australien"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32013,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 102,
+          "name": "Serbien"
+        },
+        "away": {
+          "id": 130,
+          "name": "Nigeria"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32014,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 106,
+          "name": "Polen"
+        },
+        "away": {
+          "id": 126,
+          "name": "Iran"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32015,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 110,
+          "name": "Tunisien"
+        },
+        "away": {
+          "id": 122,
+          "name": "Egypten"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 32016,
+        "date": "2026-07-03T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 32"
+      },
+      "teams": {
+        "home": {
+          "id": 114,
+          "name": "Ghana"
+        },
+        "away": {
+          "id": 118,
+          "name": "Kamerun"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33001,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 108,
+          "name": "Argentina"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33002,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 116,
+          "name": "Spanien"
+        },
+        "away": {
+          "id": 124,
+          "name": "Nederländerna"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33003,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 132,
+          "name": "Italien"
+        },
+        "away": {
+          "id": 140,
+          "name": "USA"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33004,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 104,
+          "name": "Frankrike"
+        },
+        "away": {
+          "id": 112,
+          "name": "Tyskland"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33005,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 128,
+          "name": "Belgien"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33006,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 136,
+          "name": "England"
+        },
+        "away": {
+          "id": 144,
+          "name": "Danmark"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33007,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 102,
+          "name": "Serbien"
+        },
+        "away": {
+          "id": 106,
+          "name": "Polen"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 33008,
+        "date": "2026-07-07T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 110,
+          "name": "Tunisien"
+        },
+        "away": {
+          "id": 114,
+          "name": "Ghana"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 34001,
+        "date": "2026-07-11T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Quarter-finals"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 116,
+          "name": "Spanien"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 34002,
+        "date": "2026-07-11T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Quarter-finals"
+      },
+      "teams": {
+        "home": {
+          "id": 132,
+          "name": "Italien"
+        },
+        "away": {
+          "id": 104,
+          "name": "Frankrike"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 34003,
+        "date": "2026-07-11T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Quarter-finals"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 136,
+          "name": "England"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 34004,
+        "date": "2026-07-11T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Quarter-finals"
+      },
+      "teams": {
+        "home": {
+          "id": 102,
+          "name": "Serbien"
+        },
+        "away": {
+          "id": 110,
+          "name": "Tunisien"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 35001,
+        "date": "2026-07-14T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Semi-finals"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 104,
+          "name": "Frankrike"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 35002,
+        "date": "2026-07-14T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Semi-finals"
+      },
+      "teams": {
+        "home": {
+          "id": 120,
+          "name": "Portugal"
+        },
+        "away": {
+          "id": 102,
+          "name": "Serbien"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    },
+    {
+      "fixture": {
+        "id": 36001,
+        "date": "2026-07-19T18:00:00+00:00",
+        "status": {
+          "short": "NS"
+        }
+      },
+      "league": {
+        "round": "Final"
+      },
+      "teams": {
+        "home": {
+          "id": 100,
+          "name": "Brasilien"
+        },
+        "away": {
+          "id": 120,
+          "name": "Portugal"
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      }
+    }
+  ]
+}
