@@ -45,10 +45,14 @@ automatiskt; på Node 24+ behövs den inte.)
 ```bash
 npm install                 # snabbt – inga native-paket att kompilera
 cp .env.example .env        # USE_MOCK_DATA=true funkar direkt med exempeldata
+# Sätt ett eget ADMIN_PASSWORD (minst 10 tecken) i .env innan nästa steg:
 npm run seed-admin          # skapar site-admin från ADMIN_* i .env
 node scripts/sync.js        # laddar lag + matcher + slutspelsträd (mockdata)
 npm start                   # http://localhost:3000
 ```
+> Säkerhet: `SESSION_SECRET` genereras automatiskt lokalt (sparas i `.session-secret`,
+> gitignorerad). I produktion **måste** du sätta en egen `SESSION_SECRET` – annars startar
+> appen inte. Standard-adminlösenord är borttaget; du måste välja ett eget.
 Logga in som admin → skapa en liga → skapa en inbjudningskod → registrera spelare med koden →
 tippa matcher och slutspelsträd → admin registrerar resultat → poäng och topplista uppdateras
 automatiskt.

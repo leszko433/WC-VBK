@@ -4,8 +4,17 @@ const bcrypt = require('bcryptjs');
 const db = require('../db');
 
 const email = (process.env.ADMIN_EMAIL || 'admin@example.com').toLowerCase();
-const password = process.env.ADMIN_PASSWORD || 'changeme123';
+const password = process.env.ADMIN_PASSWORD;
 const name = process.env.ADMIN_NAME || 'Admin';
+
+// Refuse to create an admin with a missing/weak/known default password.
+if (!password || password.length < 10 || password.toLowerCase() === 'changeme123') {
+  console.error(
+    '\nSätt ett eget ADMIN_PASSWORD (minst 10 tecken) i .env innan du kör seed-admin.\n' +
+    'Exempel i .env:  ADMIN_PASSWORD=ettLangtEgetLosenord\n'
+  );
+  process.exit(1);
+}
 
 const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
 if (existing) {
