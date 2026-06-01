@@ -13,11 +13,11 @@ const db = require('../db');
 const bonus = require('../lib/bonus');
 
 function reset() {
-  db.pragma('foreign_keys = OFF');
+  db.exec('PRAGMA foreign_keys = OFF');
   db.exec(`DELETE FROM tournament_picks; DELETE FROM bonus_answers; DELETE FROM bonus_questions;
            DELETE FROM bracket_slots; DELETE FROM matches; DELETE FROM players;
            DELETE FROM teams; DELETE FROM users; DELETE FROM leagues;`);
-  db.pragma('foreign_keys = ON');
+  db.exec('PRAGMA foreign_keys = ON');
   db.prepare('INSERT INTO users (id,email,password_hash,display_name) VALUES (1,?,?,?),(2,?,?,?)').run('a', 'h', 'A', 'b', 'h', 'B');
   db.prepare('INSERT INTO leagues (id,name,admin_user_id,join_code) VALUES (1,?,1,?)').run('L', 'C');
   db.prepare('INSERT INTO teams (id,name) VALUES (1,?),(2,?)').run('Brasilien', 'Portugal');

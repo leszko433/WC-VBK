@@ -32,9 +32,18 @@ rätt svar och poängen delas ut automatiskt till matchande svar.
 
 Hela regelverket finns på `/rules.html`.
 
+## Krav
+**Node.js 22.5 eller senare** (helst den senaste versionen). Inget annat behövs – databasen
+använder Node:s inbyggda SQLite, så **ingen kompilator, Visual Studio eller Python** krävs och
+alla beroenden är ren JavaScript. (På Node 22/23 läggs flaggan `--experimental-sqlite` till
+automatiskt; på Node 24+ behövs den inte.)
+
+> 💡 Kör **inte** projektet i en OneDrive-/molnsynkad mapp – filsynk kan låsa filer i
+> `node_modules` och ge `EPERM`-fel under `npm install`. Lägg det t.ex. i `C:\dev\WC-VBK`.
+
 ## Kom igång (lokalt)
 ```bash
-npm install
+npm install                 # snabbt – inga native-paket att kompilera
 cp .env.example .env        # USE_MOCK_DATA=true funkar direkt med exempeldata
 npm run seed-admin          # skapar site-admin från ADMIN_* i .env
 node scripts/sync.js        # laddar lag + matcher + slutspelsträd (mockdata)
