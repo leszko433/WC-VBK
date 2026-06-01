@@ -14,9 +14,9 @@ const db = require('../db');
 const bracket = require('../lib/bracket');
 
 function seed() {
-  db.pragma('foreign_keys = OFF');
+  db.exec('PRAGMA foreign_keys = OFF');
   db.exec('DELETE FROM bracket_predictions; DELETE FROM bracket_slots; DELETE FROM qualifier_picks; DELETE FROM teams; DELETE FROM users; DELETE FROM leagues;');
-  db.pragma('foreign_keys = ON');
+  db.exec('PRAGMA foreign_keys = ON');
   db.prepare('INSERT INTO teams (id, name, grp) VALUES (1,?,?),(2,?,?)').run('A', 'X', 'B', 'X');
   db.prepare('INSERT INTO users (id, email, password_hash, display_name) VALUES (1,?,?,?)').run('u@x', 'h', 'U');
   db.prepare('INSERT INTO leagues (id, name, admin_user_id, join_code) VALUES (1,?,1,?)').run('L', 'C');

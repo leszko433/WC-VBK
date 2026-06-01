@@ -13,9 +13,9 @@ const db = require('../db');
 const scorers = require('../lib/scorers');
 
 function reset() {
-  db.pragma('foreign_keys = OFF');
+  db.exec('PRAGMA foreign_keys = OFF');
   db.exec('DELETE FROM scorer_picks; DELETE FROM players; DELETE FROM users; DELETE FROM leagues;');
-  db.pragma('foreign_keys = ON');
+  db.exec('PRAGMA foreign_keys = ON');
   db.prepare('INSERT INTO users (id, email, password_hash, display_name) VALUES (1,?,?,?)').run('u', 'h', 'U');
   db.prepare('INSERT INTO leagues (id, name, admin_user_id, join_code) VALUES (1,?,1,?)').run('L', 'C');
 }
