@@ -286,23 +286,23 @@ function renderBracket() {
     const col = document.createElement('div');
     col.className = 'bcol';
     const adv = bracketData.advancePoints[round] || 0;
-    col.innerHTML = `<h4>${ROUND_TITLE[round]} ${adv ? `· +${adv}p/lag` : ''}</h4>`;
-    slots.forEach((s) => col.appendChild(renderSlot(s)));
+    col.innerHTML = `<h4>${ROUND_TITLE[round]}${adv ? ` <span class="adv">+${adv}p/lag</span>` : ''}</h4>`;
+    slots.forEach((s, i) => col.appendChild(renderSlot(s, round, i + 1)));
     wrap.appendChild(col);
   });
 }
 
-function renderSlot(s) {
+function renderSlot(s, round, num) {
   const el = document.createElement('div');
   const finished = s.home_goals != null && s.away_goals != null;
   const locked = finished || !!s.locked;
-  el.className = 'bslot' + (locked ? ' locked' : '');
+  el.className = 'bslot' + (locked ? ' locked' : '') + (round === 'final' ? ' final-slot' : '');
   const sideHtml = (id, name, flag) => {
     if (!id) return `<div class="tbd">— okänt lag —</div>`;
     const sel = s.pred_winner_team_id === id ? ' sel' : '';
     const actual = finished && s.winner_team_id === id ? ' actual-win' : '';
     return `<div class="pick${sel}${actual}" data-slot="${s.id}" data-team="${id}">
-      ${esc(flag || '')} ${esc(name)}</div>`;
+      <span class="flag">${esc(flag || '🏳️')}</span> ${esc(name)}</div>`;
   };
   const ph = s.pred_home != null ? s.pred_home : '';
   const pa = s.pred_away != null ? s.pred_away : '';
@@ -311,7 +311,9 @@ function renderSlot(s) {
     res = `<div class="res">Facit: ${s.home_goals}–${s.away_goals}` +
       (s.points_result != null ? ` · <b>+${(s.points_result || 0) + (s.points_advance || 0)}p</b>` : '') + `</div>`;
   }
+  const label = round === 'final' ? '🏆 Final' : `${ROUND_TITLE[round]} ${num}`;
   el.innerHTML =
+    `<div class="slabel">${esc(label)}</div>` +
     sideHtml(s.home_team_id, s.home_name, s.home_flag) +
     sideHtml(s.away_team_id, s.away_name, s.away_flag) +
     `<div class="sline">
