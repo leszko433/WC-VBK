@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VM-tips 2026</title>
-  <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <div class="brand">⚽ <span>VM-tips <b>2026</b></span></div>
+    <div class="brand">
+      <img class="logo" src="logo.png" alt="VBK" onerror="this.onerror=null;this.src='logo.svg'" />
+      <span>VM-tips <b>2026</b></span>
+    </div>
     <nav id="nav" class="nav hidden">
       <a href="#" data-view="dashboard">Mina ligor</a>
       <a href="rules.html">Poängsystem</a>
@@ -24,6 +29,7 @@
     <!-- AUTH -->
     <section id="view-auth" class="view">
       <div class="auth-wrap">
+        <img class="logo-big" src="logo.png" alt="VBK" onerror="this.onerror=null;this.src='logo.svg'" />
         <div class="card auth-card">
           <div class="tabs">
             <button class="tab active" data-tab="login">Logga in</button>

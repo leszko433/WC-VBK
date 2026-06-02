@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="VBK VM-tips">
+  <circle cx="60" cy="60" r="55" fill="#003B71"/>
+  <circle cx="60" cy="60" r="55" fill="none" stroke="#f6c453" stroke-width="4"/>
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#3a8fd6" stroke-width="1.5" opacity="0.5"/>
+  <text x="60" y="57" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="33" fill="#ffffff" letter-spacing="1">VBK</text>
+  <text x="60" y="83" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="700" font-size="17" fill="#f6c453" letter-spacing="2">2026</text>
+</svg>
