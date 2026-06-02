@@ -1,4 +1,6 @@
-// Bootstrap a site admin from env vars. Idempotent: promotes if already exists.
+// Bootstrap a site admin from env vars. Re-running always syncs the account's
+// password/name/admin flag to the current .env (so changing ADMIN_PASSWORD and
+// re-running actually updates the login).
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const db = require('../db');
@@ -16,12 +18,14 @@ if (!password || password.length < 10 || password.toLowerCase() === 'changeme123
   process.exit(1);
 }
 
+const hash = bcrypt.hashSync(password, 10);
 const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
 if (existing) {
-  db.prepare('UPDATE users SET is_site_admin = 1 WHERE id = ?').run(existing.id);
-  console.log(`Promoted existing user to site admin: ${email}`);
+  db.prepare(
+    'UPDATE users SET password_hash = ?, display_name = ?, is_site_admin = 1 WHERE id = ?'
+  ).run(hash, name, existing.id);
+  console.log(`Updated site admin (password set from ADMIN_PASSWORD): ${email}`);
 } else {
-  const hash = bcrypt.hashSync(password, 10);
   db.prepare(
     'INSERT INTO users (email, password_hash, display_name, is_site_admin) VALUES (?, ?, ?, 1)'
   ).run(email, hash, name);
